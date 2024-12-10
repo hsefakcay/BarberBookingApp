@@ -241,6 +241,11 @@ class _BarberDetailPageState extends State<BarberDetailPage> {
                       width: 100,
                       color: yellowColor,
                     ),
+                    Container(
+                      height: 100,
+                      width: 100,
+                      color: yellowColor,
+                    ),
                   ],
                 )
               ],
