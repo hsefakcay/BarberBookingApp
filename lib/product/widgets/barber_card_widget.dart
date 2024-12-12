@@ -1,6 +1,6 @@
 import 'package:barber_booking_app/model/barber_model.dart';
 import 'package:barber_booking_app/core/constants/colors.dart';
-import 'package:barber_booking_app/views/barber_detail_page.dart';
+import 'package:barber_booking_app/views/barber_detail_page/barber_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

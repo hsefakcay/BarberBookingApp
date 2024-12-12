@@ -6,6 +6,8 @@ ThemeData get darkTheme {
     appBarTheme: AppBarTheme(
       color: blackColor,
     ),
+    elevatedButtonTheme:
+        ElevatedButtonThemeData(style: ElevatedButton.styleFrom(backgroundColor: yellowColor)),
     scaffoldBackgroundColor: blackColor,
     checkboxTheme: CheckboxThemeData(fillColor: WidgetStateProperty.all(Colors.green)),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(backgroundColor: Colors.amber),

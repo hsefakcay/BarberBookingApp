@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
           child: Text(appLocalizations?.nearbyBarbershops ?? "",
               style: Theme.of(context).textTheme.labelMedium),
         ),
-        Container(
+        SizedBox(
           height: height * 0.47,
           child: ListView(scrollDirection: Axis.horizontal, children: <Widget>[
             BarberShopCard(
@@ -125,11 +125,9 @@ class HomePage extends StatelessWidget {
       decoration: InputDecoration(
           filled: true,
           fillColor: darkGreyColor,
-          prefixIcon: Icon(Icons.search),
+          prefixIcon: const Icon(Icons.search),
           prefixIconColor: yellowColor,
-          border: OutlineInputBorder(
-              borderSide: BorderSide(color: darkGreyColor),
-              borderRadius: BorderRadius.circular(20)),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
           hintText: appLocalizations?.search ?? "",
           hintStyle: TextStyle(color: greyColor, fontFamily: "Ubuntu")),
     );

@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate
       ],
-      supportedLocales: [const Locale("en", ""), const Locale("tr", "")],
+      supportedLocales: const [Locale("en", ""), Locale("tr", "")],
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: darkTheme,

@@ -4,5 +4,5 @@ class Barber {
   final double ratings;
   final int reviews;
 
-  Barber({required this.name, required this.photo, required this.ratings, required this.reviews}) {}
+  Barber({required this.name, required this.photo, required this.ratings, required this.reviews});
 }

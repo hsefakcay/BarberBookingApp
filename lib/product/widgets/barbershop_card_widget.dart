@@ -7,9 +7,9 @@ import 'package:barber_booking_app/core/constants/colors.dart';
 
 class BarberShopCard extends StatelessWidget {
   const BarberShopCard({
-    Key? key,
+    super.key,
     required this.barberShop,
-  }) : super(key: key);
+  });
 
   final BarberShop barberShop;
   @override
@@ -54,7 +54,7 @@ class BarberShopCard extends StatelessWidget {
             Row(
               children: [
                 _saveIconButton(context),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 _bookNowButton(appLocalizations, context, width),
               ],
             )
@@ -130,7 +130,7 @@ class BarberShopCard extends StatelessWidget {
         onPressed: () {
           //sayfa X e gitme işlemi
         },
-        icon: Icon(Icons.save),
+        icon: const Icon(Icons.save),
         color: whiteColor,
       ),
     );
