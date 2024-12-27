@@ -3,6 +3,19 @@ allprojects {
         google()
         mavenCentral()
     }
+    
+}
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        // Google services plugin'ini burada kullanıyoruz
+        classpath 'com.google.gms:google-services:4.4.2'
+    }
 }
 
 rootProject.buildDir = "../build"

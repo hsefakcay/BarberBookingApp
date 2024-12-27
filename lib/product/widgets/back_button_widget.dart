@@ -1,4 +1,4 @@
-import 'package:barber_booking_app/core/constants/colors.dart';
+import 'package:barber_booking_app/product/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomBackButton extends StatelessWidget {
@@ -10,11 +10,11 @@ class CustomBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
         radius: 25,
-        backgroundColor: blackColor,
+        backgroundColor: ColorConstants.blackColor,
         child: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back_rounded, color: whiteColor)));
+            icon: const Icon(Icons.arrow_back_rounded, color: ColorConstants.whiteColor),),);
   }
 }

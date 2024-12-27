@@ -1,0 +1,1 @@
+class FirebaseCustomException implements Exception {}
