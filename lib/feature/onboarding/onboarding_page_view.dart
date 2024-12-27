@@ -1,8 +1,7 @@
-import 'package:barber_booking_app/feature/onboarding/onboarding_screen1.dart';
-import 'package:barber_booking_app/feature/onboarding/onboarding_screen2.dart';
-import 'package:barber_booking_app/feature/onboarding/onboarding_screen3.dart';
+import 'package:barber_booking_app/feature/onboarding/onboarding_screen.dart';
 import 'package:barber_booking_app/feature/onboarding/widgets/onboarding_button.dart';
 import 'package:barber_booking_app/feature/onboarding/widgets/onboarding_indicator.dart';
+import 'package:barber_booking_app/product/constants/string_constants.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingPageView extends StatefulWidget {
@@ -29,9 +28,9 @@ class OnboardingPageViewState extends State<OnboardingPageView> {
               });
             },
             children: const [
-              OnboardingScreenFirst(),
-              OnboardingScreenSecond(),
-              OnboardingScreenThree(),
+              OnboardingScreen(title: StringConstants.onBoardingTitle1),
+              OnboardingScreen(title: StringConstants.onBoardingTitle2),
+              OnboardingScreen(title: StringConstants.onBoardingTitle3),
             ],
           ),
           Positioned(

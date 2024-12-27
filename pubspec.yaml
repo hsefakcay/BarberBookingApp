@@ -83,14 +83,21 @@ flutter:
       - assets/icons/
       
   fonts:
-    - family: Ubuntu
+    - family: Inter
       fonts:
         - asset: assets/fonts/Inter_18pt-Black.ttf
+          weight: 900
         - asset: assets/fonts/Inter_18pt-Bold.ttf
+          weight: 700
         - asset: assets/fonts/Inter_24pt-Black.ttf
+          weight: 900
         - asset: assets/fonts/Inter_24pt-Bold.ttf
+          weight: 700
         - asset: assets/fonts/Inter_28pt-Black.ttf
+          weight: 900
         - asset: assets/fonts/Inter_28pt-Bold.ttf
+          weight: 700
+
           
   
   

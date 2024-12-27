@@ -10,23 +10,28 @@ class OnboardingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: context.general.mediaSize.width,
+      width: context.general.mediaSize.width * 0.8,
       decoration: BoxDecoration(
-          color: ColorConstants.darkGreyColor,
-          border: Border.all(color: ColorConstants.borderDarkColor, width: 2),
-          borderRadius: BorderRadius.circular(30),),
+        color: ColorConstants.darkGreyColor,
+        border: Border.all(color: ColorConstants.borderDarkColor, width: 1),
+        borderRadius: BorderRadius.circular(30),
+      ),
       child: Padding(
-        padding: const EdgeInsets.all(5),
+        padding: context.padding.low,
         child: ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: ColorConstants.yellowColor),
-            onPressed: onPressed,
+          style: ElevatedButton.styleFrom(backgroundColor: ColorConstants.yellowColor),
+          onPressed: onPressed,
+          child: Padding(
+            padding: context.padding.low,
             child: Text(
               text,
               style: Theme.of(context)
                   .textTheme
-                  .bodyLarge
+                  .headlineSmall
                   ?.copyWith(color: ColorConstants.blackColor, fontWeight: FontWeight.bold),
-            ),),
+            ),
+          ),
+        ),
       ),
     );
   }

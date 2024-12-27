@@ -1,8 +1,13 @@
-import 'package:barber_booking_app/product/constants/string_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:kartal/kartal.dart';
 
-class OnboardingScreenFirst extends StatelessWidget {
-  const OnboardingScreenFirst({super.key});
+class OnboardingScreen extends StatelessWidget {
+  const OnboardingScreen({
+    required this.title,
+    super.key,
+  });
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +17,11 @@ class OnboardingScreenFirst extends StatelessWidget {
           child: Image.asset('assets/images/barber_onboarding2.jpg', fit: BoxFit.cover),
         ),
         Positioned(
-          bottom: 150,
+          top: context.general.mediaSize.height * 0.68,
           left: 20,
           right: 20,
           child: Text(
-            StringConstants.onBoardingTitle1,
+            title,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold),
           ),
