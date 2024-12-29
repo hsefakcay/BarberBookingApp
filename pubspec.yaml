@@ -41,6 +41,9 @@ dependencies:
   responsive_framework: ^1.5.1
   responsive_builder: ^0.7.1
 
+  # Utility
+  image_picker: ^1.1.2
+
   # Services
   dio: ^5.7.0
 

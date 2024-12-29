@@ -42,7 +42,7 @@ class OnboardingPageViewState extends State<OnboardingPageView> {
                 OnboardingIndicator(currentIndex: _currentIndex),
                 const SizedBox(height: 20),
                 OnboardingButton(
-                  text: _currentIndex == 2 ? 'Get Started' : 'Next',
+                  text: _currentIndex == 2 ? 'GET STARTED' : 'NEXT',
                   onPressed: () {
                     if (_currentIndex < 2) {
                       _pageController.nextPage(

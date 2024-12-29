@@ -27,7 +27,7 @@ class OnboardingButton extends StatelessWidget {
               text,
               style: Theme.of(context)
                   .textTheme
-                  .headlineSmall
+                  .titleMedium
                   ?.copyWith(color: ColorConstants.blackColor, fontWeight: FontWeight.bold),
             ),
           ),

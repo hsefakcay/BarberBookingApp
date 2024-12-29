@@ -1,7 +1,10 @@
 import 'package:barber_booking_app/product/constants/color_constants.dart';
+import 'package:barber_booking_app/product/enums/icon_size.dart';
 import 'package:barber_booking_app/product/models/barbershop.dart';
+import 'package:barber_booking_app/product/utility/app_shapes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:kartal/kartal.dart';
 
 class BarberShopCard extends StatelessWidget {
   const BarberShopCard({
@@ -18,6 +21,7 @@ class BarberShopCard extends StatelessWidget {
 
     return Card(
       color: ColorConstants.darkGreyColor,
+      shape: AppShapes.cardShape,
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
@@ -48,11 +52,13 @@ class BarberShopCard extends StatelessWidget {
                         color: ColorConstants.yellowColor,
                         size: 16,
                       ),
-                      Text('${barberShop.distance} km',
-                          style: const TextStyle(
-                            color: ColorConstants.whiteColor,
-                            fontSize: 12,
-                          ),),
+                      Text(
+                        '${barberShop.distance} km',
+                        style: const TextStyle(
+                          color: ColorConstants.whiteColor,
+                          fontSize: 12,
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -72,67 +78,70 @@ class BarberShopCard extends StatelessWidget {
   }
 
   Stack _barbershopImage(double height, double width, BuildContext context) {
-    return Stack(children: [
-      Container(
-        decoration: BoxDecoration(
-            border: Border.all(color: ColorConstants.greyColor),
-            borderRadius: BorderRadius.circular(10),),
-        height: height * 0.26,
-        width: width * 0.55,
-        child: Image.network(
-          barberShop.image,
-          fit: BoxFit.cover,
-          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-            if (loadingProgress == null) {
-              return child;
-            } else {
-              return Center(
-                child: CircularProgressIndicator(
-                  value: loadingProgress.expectedTotalBytes != null
-                      ? loadingProgress.cumulativeBytesLoaded /
-                          (loadingProgress.expectedTotalBytes ?? 1)
-                      : null,
-                ),
-              );
-            }
-          },
-          errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
-            return Image.asset(
-              'assets/images/barberShop.jpg',
-              fit: BoxFit.cover,
-            );
-          },
-        ),
-      ),
-      Positioned(
-        top: 10,
-        left: 10,
-        child: Container(
+    return Stack(
+      children: [
+        Container(
           decoration: BoxDecoration(
+            border: Border.all(color: ColorConstants.greyColor),
             borderRadius: BorderRadius.circular(10),
-            color: ColorConstants.darkGreyColor,
           ),
-          width: width * 0.15,
-          child: Padding(
-            padding: const EdgeInsets.all(4),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Icon(
-                  Icons.star_sharp,
-                  color: ColorConstants.yellowColor,
-                  size: width * 0.05,
-                ),
-                Text(
-                  barberShop.ratings.toString(),
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ],
+          height: height * 0.26,
+          width: width * 0.55,
+          child: Image.network(
+            barberShop.image,
+            fit: BoxFit.cover,
+            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) {
+                return child;
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            (loadingProgress.expectedTotalBytes ?? 1)
+                        : null,
+                  ),
+                );
+              }
+            },
+            errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+              return Image.asset(
+                'assets/images/barberShop.jpg',
+                fit: BoxFit.cover,
+              );
+            },
+          ),
+        ),
+        Positioned(
+          top: 10,
+          left: 10,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: ColorConstants.darkGreyColor,
+            ),
+            width: width * 0.15,
+            child: Padding(
+              padding: context.padding.low,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Icon(
+                    Icons.star_sharp,
+                    color: ColorConstants.yellowColor,
+                    size: IconSize.small.value,
+                  ),
+                  Text(
+                    barberShop.ratings.toString(),
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    ],);
+      ],
+    );
   }
 
   Container _bookNowButton(AppLocalizations? appLocalizations, BuildContext context, double width) {
@@ -146,7 +155,12 @@ class BarberShopCard extends StatelessWidget {
         onPressed: () {
           //sayfa A e gitme işlemi
         },
-        child: Text(appLocalizations?.bookNow ?? '', style: Theme.of(context).textTheme.labelLarge),
+        child: Text(
+          appLocalizations?.bookNow ?? '',
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: ColorConstants.blackColor,
+              ),
+        ),
       ),
     );
   }
@@ -160,11 +174,11 @@ class BarberShopCard extends StatelessWidget {
         color: ColorConstants.greyButtonColor,
       ),
       child: IconButton(
-        iconSize: 24,
+        iconSize: IconSize.normal.value,
         onPressed: () {
           //sayfa X e gitme işlemi
         },
-        icon: const Icon(Icons.save),
+        icon: const Icon(Icons.bookmark_border_rounded),
         color: ColorConstants.whiteColor,
       ),
     );

@@ -1,47 +1,38 @@
+import 'package:barber_booking_app/feature/barber_detail_page/barber_detail_page_mixin.dart';
+import 'package:barber_booking_app/feature/barber_detail_page/widgets/bottom_sheet_widget.dart';
+import 'package:barber_booking_app/feature/barber_detail_page/widgets/pro_barber_label.dart';
 import 'package:barber_booking_app/product/constants/color_constants.dart';
-import 'package:barber_booking_app/product/constants/sizes.dart';
+import 'package:barber_booking_app/product/constants/string_constants.dart';
+import 'package:barber_booking_app/product/enums/icon_size.dart';
 import 'package:barber_booking_app/product/models/barber.dart';
-import 'package:barber_booking_app/product/models/service.dart';
 import 'package:barber_booking_app/product/widgets/back_button_widget.dart';
 import 'package:barber_booking_app/product/widgets/bottom_bar_button_widget.dart';
 import 'package:barber_booking_app/product/widgets/save_button.dart';
-import 'package:barber_booking_app/product/services/service_service.dart';
-import 'package:barber_booking_app/feature/barber_detail_page/widgets/bottom_sheet_widget.dart';
-import 'package:barber_booking_app/feature/barber_detail_page/widgets/pro_barber_label.dart';
 import 'package:flutter/material.dart';
+import 'package:kartal/kartal.dart';
 
 class BarberDetailPage extends StatefulWidget {
-  const BarberDetailPage({super.key, required this.barber});
+  const BarberDetailPage({required this.barber, super.key});
   final Barber barber;
 
   @override
   State<BarberDetailPage> createState() => _BarberDetailPageState();
 }
 
-class _BarberDetailPageState extends State<BarberDetailPage> {
-  final ServiceService _serviceService = ServiceService();
-  late Future<List<Service>> _services;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _services = _serviceService.fetchServices();
-  }
-
-  final String bottomButtonText = "BOOK NOW";
+class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPageMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomBarButton(
-          text: bottomButtonText, backgroundColor: ColorConstants.yellowColor, onPressed: () {}),
+          text: StringConstants.bottomButtonText,
+          backgroundColor: ColorConstants.yellowColor,
+          onPressed: () {}),
       body: Stack(
         clipBehavior: Clip.none,
-        alignment: AlignmentDirectional.topStart,
         children: <Widget>[
           Positioned.fill(child: _barberImage(context)),
           const Positioned(top: 30, left: 20, child: CustomBackButton()),
-          const Positioned(top: 30, right: 20, child: SaveButton()),
+          Positioned(top: 30, right: 20, child: SaveButton(barber: widget.barber)),
           Positioned(
             top: MediaQuery.sizeOf(context).height * 0.3,
             child: Container(
@@ -66,11 +57,11 @@ class _BarberDetailPageState extends State<BarberDetailPage> {
                         BuildBarberRatings(barber: widget.barber)
                       ],
                     ),
-                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.03),
+                    SizedBox(height: context.general.mediaSize.height * 0.03),
                     Column(
                       children: [
                         _bookingDateCard(context),
-                        SizedBox(height: MediaQuery.sizeOf(context).height * 0.03),
+                        SizedBox(height: context.general.mediaSize.height * 0.03),
                         serviceOptionsList(context),
                       ],
                     ),
@@ -95,14 +86,14 @@ class _BarberDetailPageState extends State<BarberDetailPage> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 3),
         child: FutureBuilder(
-          future: _services,
+          future: services,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             }
 
             if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
+              return const Center(child: Placeholder());
             }
 
             if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -171,7 +162,7 @@ class _BarberDetailPageState extends State<BarberDetailPage> {
       onPressed: () {
         bottomSheet(context);
       },
-      icon: const Icon(Icons.edit_outlined, size: IconSizes.largeIcon),
+      icon: Icon(Icons.edit_outlined, size: IconSize.medium.value),
     );
   }
 
@@ -218,7 +209,7 @@ class BuildBarberRatings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Icon(Icons.star_sharp, size: IconSizes.mediumIcon, color: ColorConstants.yellowColor),
+        Icon(Icons.star_sharp, size: IconSize.normal.value, color: ColorConstants.yellowColor),
         Text(barber.ratings.toString(), style: Theme.of(context).textTheme.bodyMedium),
         Text(' - ${barber.reviews} reviews', style: Theme.of(context).textTheme.bodySmall),
       ],

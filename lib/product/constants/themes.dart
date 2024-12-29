@@ -29,20 +29,26 @@ class AppTheme {
           style: ElevatedButton.styleFrom(
             backgroundColor: ColorConstants.yellowColor,
             textStyle: const TextStyle(
-              color: ColorConstants.whiteColor,
+              color: ColorConstants.blackColor,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
+        indicatorColor: ColorConstants.yellowColor,
         inputDecorationTheme: InputDecorationTheme(
-          fillColor: ColorConstants.timeContainerColor,
+          focusColor: ColorConstants.yellowColor,
+          fillColor: ColorConstants.darkGreyColor,
           filled: true,
+
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: ColorConstants.yellowColor),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: ColorConstants.greyColor),
+              borderRadius: BorderRadius.circular(15)),
           labelStyle:
               const TextStyle(color: ColorConstants.greyColor), // Input alanındaki etiket rengi
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: ColorConstants.greyColor),
-          ), // Giriş alanı kenarlığı
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: ButtonStyle(
@@ -50,7 +56,7 @@ class AppTheme {
               const BorderSide(color: ColorConstants.darkGreyColor),
             ),
             textStyle: WidgetStateProperty.all<TextStyle?>(
-              context.general.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700),
+              context.general.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
             padding: WidgetStateProperty.all(const EdgeInsets.all(12)),
             backgroundColor: WidgetStateProperty.all(ColorConstants.yellowColor),
@@ -62,6 +68,7 @@ class AppTheme {
         floatingActionButtonTheme:
             const FloatingActionButtonThemeData(backgroundColor: Colors.amber),
         buttonTheme: const ButtonThemeData(
+          textTheme: ButtonTextTheme.accent,
           colorScheme: ColorScheme.dark(
             onPrimary: ColorConstants.yellowColor,
             onSecondary: ColorConstants.yellowColor,
