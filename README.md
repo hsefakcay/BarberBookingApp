@@ -1,4 +1,4 @@
-![Screenshot_1736713004](https://github.com/user-attachments/assets/4fd41322-cab8-4cac-b52b-d5a4d97edbf0)# Barber Booking App 💈 
+# Barber Booking App 💈 
 
 A comprehensive **Barber Booking Application** designed to provide a seamless booking experience for users and effective management tools for barbershops. The app is built using modern tools and technologies to ensure efficiency, scalability, and a user-friendly interface.
 
