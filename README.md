@@ -28,6 +28,7 @@ A comprehensive **Barber Booking Application** designed to provide a seamless bo
 
 ---
 📜 API Endpoints
+
 User APIs
 - POST /api/users/register - User registration.
 - POST /api/users/login - User login.
