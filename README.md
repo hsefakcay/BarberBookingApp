@@ -46,14 +46,7 @@ Appointment APIs
 
 ---
 ## 🎥 Screenshots
-![Screenshot_1736712494](https://github.com/user-attachments/assets/9bca5b82-846f-42c6-b1f2-22c28d54848c)
-![Screenshot_1736712475](https://github.com/user-attachments/assets/b6829e00-df8c-4e22-97e4-3ce430edb85b)
-![Screenshot_1736712485](https://github.com/user-attachments/assets/e98ddc64-8bc3-4820-ab6c-8e658f06a7e0)
-![Screenshot_1736712806](https://github.com/user-attachments/assets/87e66eff-6a09-4684-91b7-36bd9e9d3534)
-![Screenshot_1736712811](https://github.com/user-attachments/assets/aa9fe83b-84ff-45ce-b228-06c440f00e33)
-![Screenshot_1736712815](https://github.com/user-attachments/assets/4fe1bb58-f489-465b-aabb-e911a7b4e541)
-![Screenshot_1736712826](https://github.com/user-attachments/assets/926cd406-eef7-4551-a420-c04a1048cd85)
-
+<img src="https://github.com/user-attachments/assets/9bca5b82-846f-42c6-b1f2-22c28d54848c" alt="Home Screen" width="300"/> *Explore barbers and their services on the home screen.* <img src="https://github.com/user-attachments/assets/b6829e00-df8c-4e22-97e4-3ce430edb85b" alt="Booking Screen" width="300"/> *Easily book appointments with your preferred barber.* <img src="https://github.com/user-attachments/assets/e98ddc64-8bc3-4820-ab6c-8e658f06a7e0" alt="Profile Screen" width="300"/> *Manage your account and favorite barbers.* <img src="https://github.com/user-attachments/assets/87e66eff-6a09-4684-91b7-36bd9e9d3534" alt="Notification Screen" width="300"/> *Receive notifications for upcoming appointments.* <img src="https://github.com/user-attachments/assets/aa9fe83b-84ff-45ce-b228-06c440f00e33" alt="Barber Details Screen" width="300"/> *View detailed information about barbers.* <img src="https://github.com/user-attachments/assets/4fe1bb58-f489-465b-aabb-e911a7b4e541" alt="Location Search Screen" width="300"/> *Search for barbers based on your location.* <img src="https://github.com/user-attachments/assets/926cd406-eef7-4551-a420-c04a1048cd85" alt="Favorites Screen" width="300"/> *Access your saved favorite barbers quickly.*
 ---
 
 ## 🤝 Contributing
