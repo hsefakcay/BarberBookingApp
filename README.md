@@ -60,8 +60,7 @@ Appointment APIs
 <img src="https://github.com/user-attachments/assets/2aa0f91d-1d5d-4106-b30b-e223ed318b9a" alt="Screenshot 4" width="250"/>  
 <img src="https://github.com/user-attachments/assets/10cca143-d7b2-4f0d-9a16-45dc192ef29e" alt="Screenshot 5" width="250"/>  
 <img src="https://github.com/user-attachments/assets/d796c578-96f3-425e-94fc-23b7eea547c3" alt="Screenshot 6" width="250"/>  
-
-
+<img src="https://github.com/user-attachments/assets/6ad7ebe2-751c-4994-b6a7-6eaed945f467" alt="Screenshot 6" width="250"/>  
 
 ---
 
