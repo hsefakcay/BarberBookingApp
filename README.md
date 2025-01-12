@@ -45,6 +45,8 @@ Appointment APIs
 - GET /api/appointments/:userId - Get all appointments for a user.
 
 ---
+🎥 Screenshots
+---
 
 🤝 Contributing
 Want to contribute?
