@@ -16,7 +16,7 @@ A comprehensive **Barber Booking Application** designed to provide a seamless bo
 - 🎨 Custom UI: A sleek and user-friendly interface for all users.
 
 ---
-🛠️ Technologies Used
+#  🛠️ Technologies Used
 - Flutter: For cross-platform application development.
 - Firebase Auth: For secure user authentication.
 - Firebase Firestore: For storing user-specific data like favorites and past appointments.
@@ -27,7 +27,7 @@ A comprehensive **Barber Booking Application** designed to provide a seamless bo
 - Lottie: For smooth animations and a polished user experience.
 
 ---
-📜 API Endpoints
+#  API Endpoints
 
 User APIs
 - POST /api/users/register - User registration.
