@@ -43,3 +43,14 @@ Barber APIs
 Appointment APIs
 - POST /api/appointments - Create a new appointment.
 - GET /api/appointments/:userId - Get all appointments for a user.
+
+---
+
+🤝 Contributing
+Want to contribute?
+
+Fork this repository.
+Create a new branch (git checkout -b feature/NewFeature).
+Commit your changes (git commit -m 'Add NewFeature').
+Push to the branch (git push origin feature/NewFeature).
+Open a pull request.
