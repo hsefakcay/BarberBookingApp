@@ -45,10 +45,10 @@ Appointment APIs
 - GET /api/appointments/:userId - Get all appointments for a user.
 
 ---
-🎥 Screenshots
+## 🎥 Screenshots
 ---
 
-🤝 Contributing
+## 🤝 Contributing
 Want to contribute?
 
 - Fork this repository.
