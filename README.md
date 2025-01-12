@@ -27,7 +27,7 @@ A comprehensive **Barber Booking Application** designed to provide a seamless bo
 - Lottie: For smooth animations and a polished user experience.
 
 ---
-##   API Endpoints
+## 📜 API Endpoints
 
 User APIs
 - POST /api/users/register - User registration.
