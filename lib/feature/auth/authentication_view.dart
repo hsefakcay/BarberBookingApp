@@ -20,7 +20,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
           actions: [
             AuthStateChangeAction<SignedIn>((context, state) {
               if (state.user != null) {
-                Navigator.pushNamed(context, "/home");
+                Navigator.pushNamed(context, '/completeProfile');
               }
             }),
           ],
@@ -32,8 +32,9 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                 child: Padding(
                   padding: context.padding.normal,
                   child: firebase.LoginView(
-                      action: AuthAction.signIn,
-                      providers: firebase.FirebaseUIAuth.providersFor(FirebaseAuth.instance.app)),
+                    action: AuthAction.signIn,
+                    providers: firebase.FirebaseUIAuth.providersFor(FirebaseAuth.instance.app),
+                  ),
                 ),
               ),
             ),

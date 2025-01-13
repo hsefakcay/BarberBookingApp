@@ -17,34 +17,44 @@ class SaveButton extends StatefulWidget {
 
 class _SaveButtonState extends State<SaveButton> {
   bool isFavoriteAdded = false;
+  @override
+  void initState() {
+    super.initState();
+    _checkFavoriteStatus(); // Asenkron işlemi başlat
+  }
+
+  Future<void> _checkFavoriteStatus() async {
+    final result = await FirebaseService.isFavoriteBarber(widget.barber.id);
+    setState(() {
+      isFavoriteAdded = result; // Ekranı güncelle
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final barberId = widget.barber.id;
     return CircleAvatar(
       radius: 25,
       backgroundColor: ColorConstants.blackColor,
       child: InkWell(
         onTap: () {
-          // Favorilere ekleme işlemi
-          FirebaseService.addFavoriteBarber(barberId);
           setState(() {
             isFavoriteAdded = !isFavoriteAdded;
           });
-          //Snack bar
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              backgroundColor: ColorConstants.greyColor,
-              content: Text("Favorilere eklendi!"),
-            ),
-          );
+          // Favorilere ekleme işlemi
+          isFavoriteAdded == true
+              ? FirebaseService.addFavoriteBarber(widget.barber.id)
+              : FirebaseService.deleteFavoriteBarber(widget.barber.id);
         },
-        child: Icon(
-          isFavoriteAdded ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
-          color: ColorConstants.whiteColor,
-          size: IconSize.normal.value,
-        ),
+        child: _saveIcon(),
       ),
+    );
+  }
+
+  Icon _saveIcon() {
+    return Icon(
+      isFavoriteAdded ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
+      color: ColorConstants.whiteColor,
+      size: IconSize.normal.value,
     );
   }
 }

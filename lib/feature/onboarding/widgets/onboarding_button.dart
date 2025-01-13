@@ -13,7 +13,7 @@ class OnboardingButton extends StatelessWidget {
       width: context.general.mediaSize.width * 0.8,
       decoration: BoxDecoration(
         color: ColorConstants.darkGreyColor,
-        border: Border.all(color: ColorConstants.borderDarkColor, width: 1),
+        border: Border.all(color: ColorConstants.borderDarkColor),
         borderRadius: BorderRadius.circular(30),
       ),
       child: Padding(

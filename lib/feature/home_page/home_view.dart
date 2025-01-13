@@ -1,26 +1,26 @@
-import 'package:barber_booking_app/feature/home_page/home_page_mixin.dart';
-import 'package:barber_booking_app/feature/settings_page/settings_page_view.dart';
+import 'package:barber_booking_app/feature/home_page/home_view_mixin.dart';
 import 'package:barber_booking_app/product/constants/color_constants.dart';
 import 'package:barber_booking_app/product/constants/string_constants.dart';
 import 'package:barber_booking_app/product/enums/icon_size.dart';
-
+import 'package:barber_booking_app/product/models/barbershop.dart';
 import 'package:barber_booking_app/product/widgets/barber_card_widget.dart';
 import 'package:barber_booking_app/product/widgets/barbershop_card_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kartal/kartal.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeView extends ConsumerStatefulWidget {
+  const HomeView({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomeViewState();
 }
 
-class _HomePageState extends State<HomePage> with HomePageMixin {
+class _HomeViewState extends ConsumerState<HomeView> with HomeViewMixin {
   @override
   Widget build(BuildContext context) {
+    final userNameState = ref.watch(homeProvider);
     final appLocalizations = AppLocalizations.of(context);
 
     return Scaffold(
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             children: [
-              _helloTextRow(appLocalizations, context),
+              _helloTextRow(appLocalizations, context, userNameState),
               SizedBox(height: context.general.mediaSize.height * 0.03),
               _searchTextField(appLocalizations),
               SizedBox(height: context.general.mediaSize.height * 0.03),
@@ -66,8 +66,7 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
         size: IconSize.medium.value,
       ),
       onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute<SettingsPage>(builder: (context) => const SettingsPage()));
+        Navigator.pushNamed(context, '/setting');
       },
     );
   }
@@ -83,7 +82,11 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
     );
   }
 
-  Row _helloTextRow(AppLocalizations? appLocalizations, BuildContext context) {
+  Row _helloTextRow(
+    AppLocalizations? appLocalizations,
+    BuildContext context,
+    AsyncValue<String> userNameState,
+  ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -91,9 +94,13 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
           "${appLocalizations?.welcomeMessage ?? ""},",
           style: Theme.of(context).textTheme.headlineLarge,
         ),
-        Text(
-          FirebaseAuth.instance.currentUser?.refreshToken ?? '',
-          style: Theme.of(context).textTheme.headlineLarge,
+        Center(
+          child: userNameState.when(
+            data: (name) =>
+                Text(name.toUpperCase(), style: Theme.of(context).textTheme.headlineLarge),
+            error: (error, _) => Text('Error: $error'),
+            loading: () => const CircularProgressIndicator(),
+          ),
         ),
       ],
     );
@@ -116,7 +123,7 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
         ),
         SizedBox(
           height: context.general.mediaSize.height * 0.47,
-          child: FutureBuilder(
+          child: FutureBuilder<List<BarberShop>>(
             future: barberShops,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -129,7 +136,7 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
               if (!snapshot.hasData || snapshot.data!.isEmpty) {
                 return const Center(child: Text('No barbers found'));
               }
-              final barberShops = snapshot.data!;
+              final barberShops = snapshot.data ?? [];
               return ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: barberShops.length,
@@ -188,12 +195,13 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
         future: barbers,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(color: ColorConstants.yellowColor),
+            );
           }
           if (snapshot.hasError) {
             return const Placeholder();
           }
-
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(child: Text('No barbers found'));
           }

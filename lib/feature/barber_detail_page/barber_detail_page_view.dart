@@ -24,9 +24,10 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomBarButton(
-          text: StringConstants.bottomButtonText,
-          backgroundColor: ColorConstants.yellowColor,
-          onPressed: () {}),
+        text: StringConstants.bottomButtonText,
+        backgroundColor: ColorConstants.yellowColor,
+        onPressed: () {},
+      ),
       body: Stack(
         clipBehavior: Clip.none,
         children: <Widget>[
@@ -54,7 +55,7 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
                       children: [
                         const ProBarberLabel(),
                         _buildBarberName(context),
-                        BuildBarberRatings(barber: widget.barber)
+                        BuildBarberRatings(barber: widget.barber),
                       ],
                     ),
                     SizedBox(height: context.general.mediaSize.height * 0.03),

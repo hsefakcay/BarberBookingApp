@@ -1,12 +1,18 @@
-import 'package:barber_booking_app/feature/profile_page/profil_page_view.dart';
+import 'package:barber_booking_app/feature/auth/authentication_view.dart';
 import 'package:barber_booking_app/product/constants/string_constants.dart';
 import 'package:barber_booking_app/product/widgets/custom_list_tile_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,18 +26,46 @@ class SettingsPage extends StatelessWidget {
             icon: Icons.person,
             title: StringConstants.profile,
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute<ProfilePage>(
-                  builder: (context) => const ProfilePage(),
-                ),
-              );
+              Navigator.pushNamed(context, '/profile');
             },
           ),
           CustomListTile(
-              icon: Icons.notifications, title: StringConstants.notifications, onTap: () {}),
+            icon: Icons.favorite_border_rounded,
+            title: StringConstants.favorites,
+            onTap: () {
+              Navigator.pushNamed(context, '/favorites');
+            },
+          ),
+          CustomListTile(
+            icon: Icons.notifications_none_outlined,
+            title: StringConstants.notifications,
+            onTap: () {},
+          ),
           CustomListTile(icon: Icons.language, title: StringConstants.language, onTap: () {}),
           CustomListTile(icon: Icons.help, title: StringConstants.helpsAndSupport, onTap: () {}),
+          CustomListTile(
+            icon: Icons.logout_outlined,
+            title: StringConstants.logout,
+            onTap: () async {
+              try {
+                await FirebaseAuth.instance.signOut();
+                // Çıkış yaptıktan sonra login ekranına yönlendirme
+                if (mounted) {
+                  await Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute<AuthenticationView>(
+                      builder: (context) => const AuthenticationView(),
+                    ),
+                  );
+                }
+              } catch (e) {
+                // Hata durumunda kullanıcıya bir mesaj göster
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Error signing out: $e')),
+                );
+              }
+            },
+          ),
         ],
       ),
     );

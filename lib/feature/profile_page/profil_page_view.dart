@@ -1,20 +1,31 @@
 import 'dart:io';
 
+import 'package:barber_booking_app/feature/home_page/home_provider.dart';
 import 'package:barber_booking_app/product/constants/color_constants.dart';
+import 'package:barber_booking_app/product/services/firebase_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends ConsumerStatefulWidget {
   const ProfilePage({super.key});
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends ConsumerState<ProfilePage> {
   File? _profileImage; // Profil fotoğrafı için değişken
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
+  final homeProvider = StateNotifierProvider<HomeProvider, AsyncValue<String>>(
+    (ref) => HomeProvider(),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    ref.read(homeProvider.notifier).fetchUserName();
+  }
 
   // Fotoğraf seçme fonksiyonu
   Future<void> _pickImage() async {
@@ -30,10 +41,10 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Profile'),
+        title: const Text('Edit Profile'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
             Center(
@@ -50,33 +61,39 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: CircleAvatar(
                       radius: 18,
                       backgroundColor: Colors.grey[200],
-                      child: Icon(Icons.camera_alt, size: 20),
+                      child: const Icon(Icons.camera_alt, size: 20),
                     ),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Name',
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 // Bilgileri kaydetme işlemi
-                String name = _nameController.text;
-                String email = _emailController.text;
-                if (name.isNotEmpty && email.isNotEmpty) {
+                if (_nameController.text.isNotEmpty) {
+                  await FirebaseService.updateUserName(_nameController.text, context);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Profile updated!')),
+                    const SnackBar(
+                      content: Text(
+                        'Profile updated!',
+                        style: TextStyle(color: ColorConstants.whiteColor),
+                      ),
+                      backgroundColor: ColorConstants.darkGreyColor,
+                    ),
                   );
+                  await Navigator.pushNamed(context, '/home');
                   // Profil bilgilerini backend'e veya local storage'a kaydedebilirsin
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Please fill all fields')),
+                    const SnackBar(content: Text('Please fill all fields')),
                   );
                 }
               },
