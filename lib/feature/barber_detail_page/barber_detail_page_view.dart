@@ -35,7 +35,7 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
           const Positioned(top: 30, left: 20, child: CustomBackButton()),
           Positioned(top: 30, right: 20, child: SaveButton(barber: widget.barber)),
           Positioned(
-            top: MediaQuery.sizeOf(context).height * 0.3,
+            top: MediaQuery.sizeOf(context).height * 0.25,
             child: Container(
               width: MediaQuery.sizeOf(context).width,
               height: MediaQuery.sizeOf(context).height,
@@ -63,7 +63,7 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
                       children: [
                         _bookingDateCard(context),
                         SizedBox(height: context.general.mediaSize.height * 0.03),
-                        serviceOptionsList(context),
+                        _serviceOptionsList(context),
                       ],
                     ),
                   ],
@@ -76,9 +76,9 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
     );
   }
 
-  Container serviceOptionsList(BuildContext context) {
+  Container _serviceOptionsList(BuildContext context) {
     return Container(
-      height: MediaQuery.sizeOf(context).height * 0.38, // Container boyutunu sabit tutuyoruz
+      height: MediaQuery.sizeOf(context).height * 0.32, // Container boyutunu sabit tutuyoruz
       decoration: BoxDecoration(
         color: ColorConstants.darkGreyColor,
         border: Border.all(color: ColorConstants.borderDarkColor, width: 2),
@@ -161,7 +161,7 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
   IconButton editButton(BuildContext context) {
     return IconButton(
       onPressed: () {
-        bottomSheet(context);
+        bottomSheet(context, widget.barber);
       },
       icon: Icon(Icons.edit_outlined, size: IconSize.medium.value),
     );
@@ -187,12 +187,12 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
 
   SizedBox _barberImage(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.4,
       width: MediaQuery.sizeOf(context).width,
+      height: MediaQuery.sizeOf(context).height * 0.5,
       child: Image.network(
-        alignment: Alignment.topCenter,
         widget.barber.photo,
         fit: BoxFit.fitWidth,
+        alignment: Alignment.topCenter,
       ),
     );
   }

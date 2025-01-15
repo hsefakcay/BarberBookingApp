@@ -25,7 +25,7 @@ class BarberService {
   Future<Barber> createBarber(Barber barber) async {
     try {
       final response = await _dio.post<Map<String, dynamic>>(
-        '/barberservices',
+        ApiEndpoints.getBarbers,
         data: barber.toJson(),
       );
       if (response.statusCode == 201) {
@@ -49,7 +49,7 @@ class BarberService {
       }
       // Favori berberlerin bilgilerini al
       final favoriteBarbers = <Barber>[];
-      for (String barberId in favoriteBarberIds) {
+      for (final barberId in favoriteBarberIds) {
         final response = await _dio.get<Map<String, dynamic>>(
           '${ApiEndpoints.getBarbers}/$barberId',
         );

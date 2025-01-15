@@ -19,8 +19,21 @@ class _AuthenticationViewState extends State<AuthenticationView> {
         child: firebase.FirebaseUIActions(
           actions: [
             AuthStateChangeAction<SignedIn>((context, state) {
-              if (state.user != null) {
-                Navigator.pushNamed(context, '/completeProfile');
+              final user = state.user;
+              if (user != null) {
+                // Kullanıcının metadata bilgilerini al
+                final creationTime = user.metadata.creationTime;
+                final lastSignInTime = user.metadata.lastSignInTime;
+                // Yeni kullanıcı mı kontrol et
+                if (creationTime != null &&
+                    lastSignInTime != null &&
+                    creationTime == lastSignInTime) {
+                  // Yeni kullanıcı -> Complete Profile ekranına git
+                  Navigator.pushNamed(context, '/completeProfile');
+                } else {
+                  // Eski kullanıcı -> Anasayfaya git
+                  Navigator.pushNamed(context, '/home');
+                }
               }
             }),
           ],
