@@ -43,7 +43,7 @@ Barber APIs
 Appointment APIs
 - POST /api/appointments - Create a new appointment.
 - GET /api/appointments/:userId - Get all appointments for a user.
-
+http://localhost:5005/api-docs/
 ---
 ## 🎥 Screenshots
 
