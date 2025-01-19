@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-
-@immutable
 enum ImageConstants {
   barber('defaultBarber');
 

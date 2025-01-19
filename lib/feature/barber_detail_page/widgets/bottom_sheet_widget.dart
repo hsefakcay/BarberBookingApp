@@ -42,7 +42,7 @@ List<String> generateDates(int numberOfDays) {
   final now = DateTime.now();
   return List.generate(
     numberOfDays,
-    (index) => DateFormat('d EEE').format(now.add(Duration(days: index))),
+    (index) => DateFormat('d EEE MMMM y').format(now.add(Duration(days: index))),
   );
 }
 
@@ -64,8 +64,9 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
   @override
   void initState() {
     super.initState();
-    fetchBookedTimes();
     selectedDate = dates.first;
+
+    fetchBookedTimes();
   }
 
   Future<void> fetchBookedTimes() async {
@@ -136,9 +137,10 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
               await AppointmentService().addAppointment(
                 widget.barber.id,
                 FirebaseService.fetchCurrentUser()?.uid ?? '',
-                '2025-01-16',
+                selectedDate,
                 selectedTime,
               );
+              Navigator.pop(context);
             },
             child: Text(
               'SAVE',
@@ -251,12 +253,14 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
                 onTap: () {
                   setState(() {
                     selectedDate = dates[index];
+                    getBookedTimes(widget.barber.id, selectedDate);
+                    fetchBookedTimes();
                   });
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 2),
                   child: DateContainer(
-                    date: dates[index],
+                    date: dates[index].substring(0, 6),
                     isSelected: selectedDate == dates[index],
                   ),
                 ),

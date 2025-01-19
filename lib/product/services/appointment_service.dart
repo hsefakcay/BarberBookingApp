@@ -1,14 +1,26 @@
 import 'package:barber_booking_app/core/network/api_endpoints.dart';
 import 'package:barber_booking_app/core/network/dio_client.dart';
 import 'package:dio/dio.dart';
+import 'package:intl/intl.dart';
 
 class AppointmentService {
   final Dio _dio = DioClient().dio;
 
+  String formatDate(String date) {
+    try {
+      // Gelen tarihi belirtilen input formatında parse et
+      final parsedDate = DateFormat('d EEE MMMM y', 'en_US').parse(date);
+      // Tarihi hedef formata dönüştür
+      return DateFormat('yyyy-MM-dd').format(parsedDate);
+    } catch (e) {
+      throw FormatException('Invalid date or format: $e');
+    }
+  }
+
   Future<List<String>> fetchBookedTimes(String barberId, String date) async {
     try {
       final response = await _dio.get(
-        '${ApiEndpoints.getAppointments}?barberId=$barberId&date=2025-01-${int.parse(date) + 1}',
+        '${ApiEndpoints.getAppointments}?barberId=$barberId&date=${formatDate(date)}',
       );
 
       if (response.statusCode == 200) {
@@ -31,7 +43,13 @@ class AppointmentService {
 
   Future<bool> addAppointment(String barberId, String userId, String date, String time) async {
     try {
-      final data = {'barberId': barberId, 'userId': userId, 'date': date, 'time': time};
+      final formattedDate = formatDate(date);
+      final data = {
+        'barberId': barberId,
+        'userId': userId,
+        'date': formattedDate,
+        'time': time,
+      };
 
       // POST isteğini gönderiyoruz
       final response = await _dio.post<Map<String, dynamic>>(

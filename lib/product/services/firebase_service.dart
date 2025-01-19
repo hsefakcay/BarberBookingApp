@@ -80,7 +80,7 @@ class FirebaseService {
 
 // favori berberler içerisinde mi kontrolu yapan metot
   static Future<bool> isFavoriteBarber(String barberId) async {
-    final userId = fetchCurrentUser()?.uid ?? ''; // Kullanıcının UID'sini alın
+    final userId = fetchCurrentUser()?.uid ?? ''; // Kullanıcının UID'si
 
     try {
       if (userId.isEmpty) {

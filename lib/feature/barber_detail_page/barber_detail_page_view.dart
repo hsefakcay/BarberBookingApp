@@ -35,7 +35,7 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
           const Positioned(top: 30, left: 20, child: CustomBackButton()),
           Positioned(top: 30, right: 20, child: SaveButton(barber: widget.barber)),
           Positioned(
-            top: MediaQuery.sizeOf(context).height * 0.25,
+            top: MediaQuery.sizeOf(context).height * 0.2,
             child: Container(
               width: MediaQuery.sizeOf(context).width,
               height: MediaQuery.sizeOf(context).height,
@@ -78,7 +78,7 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
 
   Container _serviceOptionsList(BuildContext context) {
     return Container(
-      height: MediaQuery.sizeOf(context).height * 0.32, // Container boyutunu sabit tutuyoruz
+      height: MediaQuery.sizeOf(context).height * 0.35, // Container boyutunu sabit tutuyoruz
       decoration: BoxDecoration(
         color: ColorConstants.darkGreyColor,
         border: Border.all(color: ColorConstants.borderDarkColor, width: 2),
@@ -109,6 +109,7 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
                 return Column(
                   children: [
                     SwitchListTile(
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12), // Daha az dolgu,
                       title: Text(service.name, style: Theme.of(context).textTheme.bodyLarge),
                       subtitle: Row(
                         children: [
@@ -130,7 +131,10 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
                         });
                       },
                     ),
-                    const Divider(color: ColorConstants.greyColor, indent: 10, endIndent: 10),
+                    const SizedBox(
+                      height: 1,
+                      child: Divider(color: ColorConstants.greyColor, indent: 10, endIndent: 10),
+                    ),
                   ],
                 );
               },
