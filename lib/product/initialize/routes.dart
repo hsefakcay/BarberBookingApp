@@ -1,3 +1,4 @@
+import 'package:barber_booking_app/feature/appointments_page/appointments_page.dart';
 import 'package:barber_booking_app/feature/auth/authentication_view.dart';
 import 'package:barber_booking_app/feature/complete_profile_page/complete_profile_page_view.dart';
 import 'package:barber_booking_app/feature/favorites_page/favorites_page_view.dart';
@@ -18,5 +19,6 @@ class AppRoutes {
     '/favorites': (context) => const FavoritesPage(),
     '/setting': (context) => const SettingsPage(),
     '/completeProfile': (context) => const CompleteProfilePage(),
+    '/appointments': (context) => const AppointmentsPage(),
   };
 }

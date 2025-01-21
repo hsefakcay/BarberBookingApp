@@ -1,4 +1,6 @@
 import 'package:barber_booking_app/product/constants/color_constants.dart';
+import 'package:barber_booking_app/product/constants/string_constants.dart';
+import 'package:barber_booking_app/product/models/appointment.dart';
 import 'package:barber_booking_app/product/models/barber.dart';
 import 'package:barber_booking_app/product/services/appointment_service.dart';
 import 'package:barber_booking_app/product/services/firebase_service.dart';
@@ -6,16 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 Future<dynamic> bottomSheet(BuildContext context, Barber barber) {
-  final now = DateTime.now(); // Mevcut tarih
-  final monthName = DateFormat.MMMM().format(now);
   return showModalBottomSheet(
     context: context,
     isScrollControlled: true,
     barrierColor: Colors.transparent,
     builder: (context) {
       return BottomSheetScreen(
-        monthName: monthName,
-        now: now,
         barber: barber,
       );
     },
@@ -24,14 +22,9 @@ Future<dynamic> bottomSheet(BuildContext context, Barber barber) {
 
 class BottomSheetScreen extends StatefulWidget {
   const BottomSheetScreen({
-    required this.monthName,
-    required this.now,
     required this.barber,
     super.key,
   });
-
-  final String monthName;
-  final DateTime now;
   final Barber barber;
 
   @override
@@ -55,6 +48,8 @@ List<String> generateTimeSlots() {
 }
 
 class _BottomSheetScreenState extends State<BottomSheetScreen> {
+  final now = DateTime.now();
+  String monthName = DateFormat.MMMM().format(DateTime.now());
   String selectedDate = '';
   String selectedTime = '';
   List<String> dates = generateDates(30); // 30 gün için liste
@@ -65,7 +60,6 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
   void initState() {
     super.initState();
     selectedDate = dates.first;
-
     fetchBookedTimes();
   }
 
@@ -77,7 +71,7 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
   }
 
   Future<List<String>> getBookedTimes(String barberId, String date) async {
-    return AppointmentService().fetchBookedTimes(barberId, date);
+    return AppointmentService().fetchBookedTimesByBarber(barberId, date);
   }
 
   @override
@@ -114,7 +108,7 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
     return Padding(
       padding: const EdgeInsets.only(top: 20, bottom: 7),
       child: Text(
-        'DATE & TIME',
+        StringConstants.dateAndTime,
         style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 22),
       ),
     );
@@ -135,15 +129,17 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
             style: ElevatedButton.styleFrom(backgroundColor: ColorConstants.yellowColor),
             onPressed: () async {
               await AppointmentService().addAppointment(
-                widget.barber.id,
-                FirebaseService.fetchCurrentUser()?.uid ?? '',
-                selectedDate,
-                selectedTime,
+                Appointment(
+                  userId: FirebaseService.fetchCurrentUser()?.uid ?? '',
+                  barberId: widget.barber.id,
+                  date: selectedDate,
+                  time: selectedTime,
+                ),
               );
               Navigator.pop(context);
             },
             child: Text(
-              'SAVE',
+              StringConstants.save,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: ColorConstants.blackColor,
                     fontWeight: FontWeight.bold,
@@ -169,7 +165,7 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
             onPressed: () {},
             icon: const Icon(Icons.arrow_back_rounded, color: ColorConstants.yellowColor),
           ),
-          Text('${widget.monthName.toUpperCase()}  ${widget.now.year}'),
+          Text('${monthName.toUpperCase()}  ${now.year}'),
           IconButton(
             onPressed: () {},
             icon: const Icon(
@@ -253,6 +249,7 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
                 onTap: () {
                   setState(() {
                     selectedDate = dates[index];
+                    monthName = selectedDate.substring(6, 14);
                     getBookedTimes(widget.barber.id, selectedDate);
                     fetchBookedTimes();
                   });

@@ -10,6 +10,7 @@ class ColorConstants {
   static const Color borderDarkColor = Color(0xFF232323);
   static const Color orangeColor = Color(0xFFD96704);
   static const Color whiteColor = Color(0xFFFFFFFF);
+  static const Color greenColor = Colors.green;
   static const Color greyColor = Color(0xFF616161);
   static const Color timeContainerColor = Color(0xFF161616);
   static const Color greyButtonColor = Color(0xFF2a2a2a);

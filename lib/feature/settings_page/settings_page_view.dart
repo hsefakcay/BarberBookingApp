@@ -37,6 +37,13 @@ class _SettingsPageState extends State<SettingsPage> {
             },
           ),
           CustomListTile(
+            icon: Icons.bookmark_outline,
+            title: StringConstants.appointments,
+            onTap: () {
+              Navigator.pushNamed(context, '/appointments');
+            },
+          ),
+          CustomListTile(
             icon: Icons.notifications_none_outlined,
             title: StringConstants.notifications,
             onTap: () {},
