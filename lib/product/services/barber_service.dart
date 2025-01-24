@@ -3,6 +3,7 @@ import 'package:barber_booking_app/core/network/dio_client.dart';
 import 'package:barber_booking_app/product/models/barber.dart';
 import 'package:barber_booking_app/product/services/firebase_service.dart';
 import 'package:dio/dio.dart';
+import 'package:logging/logging.dart';
 
 class BarberService {
   final Dio _dio = DioClient().dio;
@@ -44,7 +45,7 @@ class BarberService {
       final favoriteBarberIds = await FirebaseService.fetchFavoriteBarbers();
 
       if (favoriteBarberIds.isEmpty) {
-        print('No favorite barbers found.');
+        Logger('No favorite barbers found.');
         return [];
       }
       // Favori berberlerin bilgilerini al

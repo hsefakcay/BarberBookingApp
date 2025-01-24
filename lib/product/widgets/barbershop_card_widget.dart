@@ -37,15 +37,22 @@ class BarberShopCard extends StatelessWidget {
                 children: [
                   Text(
                     appLocalizations?.openNow ?? '',
-                    style: const TextStyle(color: ColorConstants.yellowColor, fontSize: 10),
+                    style: const TextStyle(
+                      color: ColorConstants.yellowColor,
+                      fontSize: 10,
+                    ),
                   ),
                   Text(
                     barberShop.name,
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: ColorConstants.whiteColor, fontSize: 16),
+                    style: const TextStyle(
+                      color: ColorConstants.whiteColor,
+                      fontSize: 16,
+                    ),
                   ),
                   Row(
+                    // TO DO: will add theme textStyle
                     children: [
                       const Icon(
                         Icons.navigation,
@@ -90,7 +97,11 @@ class BarberShopCard extends StatelessWidget {
           child: Image.network(
             barberShop.image,
             fit: BoxFit.cover,
-            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+            loadingBuilder: (
+              BuildContext context,
+              Widget child,
+              ImageChunkEvent? loadingProgress,
+            ) {
               if (loadingProgress == null) {
                 return child;
               } else {
@@ -104,7 +115,12 @@ class BarberShopCard extends StatelessWidget {
                 );
               }
             },
-            errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+            errorBuilder: (
+              BuildContext context,
+              Object error,
+              StackTrace? stackTrace,
+            ) {
+              // TO DO: url const
               return Image.asset(
                 'assets/images/barberShop.jpg',
                 fit: BoxFit.cover,
@@ -144,7 +160,11 @@ class BarberShopCard extends StatelessWidget {
     );
   }
 
-  Container _bookNowButton(AppLocalizations? appLocalizations, BuildContext context, double width) {
+  Container _bookNowButton(
+    AppLocalizations? appLocalizations,
+    BuildContext context,
+    double width,
+  ) {
     return Container(
       width: width * 0.39,
       decoration: BoxDecoration(

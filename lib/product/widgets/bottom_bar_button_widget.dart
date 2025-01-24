@@ -27,10 +27,10 @@ class BottomBarButton extends StatelessWidget {
           onPressed: onPressed,
           child: Text(
             text,
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge
-                ?.copyWith(color: ColorConstants.blackColor, fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: ColorConstants.blackColor,
+                  fontWeight: FontWeight.bold,
+                ),
           ),
         ),
       ),

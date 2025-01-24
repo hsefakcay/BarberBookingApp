@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 
 class AppDecoration {
   // Standard border decoration
-  static BoxDecoration standardBorderDecoration({Color? color, double? radius}) {
+  static BoxDecoration standardBorderDecoration({
+    Color? color,
+    double? radius,
+  }) {
     return BoxDecoration(
       border: Border.all(color: color ?? ColorConstants.greyColor),
       borderRadius: BorderRadius.circular(radius ?? 15),

@@ -33,7 +33,13 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
         children: <Widget>[
           Positioned.fill(child: _barberImage(context)),
           const Positioned(top: 30, left: 20, child: CustomBackButton()),
-          Positioned(top: 30, right: 20, child: SaveButton(barber: widget.barber)),
+          Positioned(
+            top: 30,
+            right: 20,
+            child: SaveButton(
+              barber: widget.barber,
+            ),
+          ),
           Positioned(
             top: MediaQuery.sizeOf(context).height * 0.2,
             child: Container(
@@ -47,7 +53,10 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 30,
+                  vertical: 30,
+                ),
                 child: Column(
                   children: [
                     Column(
@@ -62,7 +71,9 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
                     Column(
                       children: [
                         _bookingDateCard(context),
-                        SizedBox(height: context.general.mediaSize.height * 0.03),
+                        SizedBox(
+                          height: context.general.mediaSize.height * 0.03,
+                        ),
                         _serviceOptionsList(context),
                       ],
                     ),
@@ -78,7 +89,7 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
 
   Container _serviceOptionsList(BuildContext context) {
     return Container(
-      height: MediaQuery.sizeOf(context).height * 0.35, // Container boyutunu sabit tutuyoruz
+      height: MediaQuery.sizeOf(context).height * 0.35,
       decoration: BoxDecoration(
         color: ColorConstants.darkGreyColor,
         border: Border.all(color: ColorConstants.borderDarkColor, width: 2),
@@ -109,8 +120,13 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
                 return Column(
                   children: [
                     SwitchListTile(
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 12), // Daha az dolgu,
-                      title: Text(service.name, style: Theme.of(context).textTheme.bodyLarge),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                      ),
+                      title: Text(
+                        service.name,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
                       subtitle: Row(
                         children: [
                           Text(
@@ -133,7 +149,11 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
                     ),
                     const SizedBox(
                       height: 1,
-                      child: Divider(color: ColorConstants.greyColor, indent: 10, endIndent: 10),
+                      child: Divider(
+                        color: ColorConstants.greyColor,
+                        indent: 10,
+                        endIndent: 10,
+                      ),
                     ),
                   ],
                 );
@@ -177,8 +197,9 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
       children: [
         Text(
           'FRIDAY, AUGUST 25',
-          style:
-              Theme.of(context).textTheme.labelSmall?.copyWith(color: ColorConstants.yellowColor),
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: ColorConstants.yellowColor,
+              ),
         ),
         Text('15:00-16:00', style: Theme.of(context).textTheme.bodyLarge),
       ],
@@ -186,7 +207,10 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
   }
 
   Text _buildBarberName(BuildContext context) {
-    return Text(widget.barber.name, style: Theme.of(context).textTheme.headlineSmall);
+    return Text(
+      widget.barber.name,
+      style: Theme.of(context).textTheme.headlineSmall,
+    );
   }
 
   SizedBox _barberImage(BuildContext context) {
@@ -214,9 +238,19 @@ class BuildBarberRatings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(Icons.star_sharp, size: IconSize.normal.value, color: ColorConstants.yellowColor),
-        Text(barber.ratings.toString(), style: Theme.of(context).textTheme.bodyMedium),
-        Text(' - ${barber.reviews} reviews', style: Theme.of(context).textTheme.bodySmall),
+        Icon(
+          Icons.star_sharp,
+          size: IconSize.normal.value,
+          color: ColorConstants.yellowColor,
+        ),
+        Text(
+          barber.ratings.toString(),
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+        Text(
+          ' - ${barber.reviews} reviews',
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
       ],
     );
   }

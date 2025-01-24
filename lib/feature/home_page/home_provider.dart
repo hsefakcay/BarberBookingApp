@@ -2,7 +2,7 @@ import 'package:barber_booking_app/product/services/firebase_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeProvider extends StateNotifier<AsyncValue<String>> {
-  HomeProvider() : super(const AsyncValue.loading()); // Başlangıçta loading durumu
+  HomeProvider() : super(const AsyncValue.loading()); // Başlangıçta loading
 
   Future<void> fetchUserName() async {
     try {
@@ -10,7 +10,7 @@ class HomeProvider extends StateNotifier<AsyncValue<String>> {
       final userName = await FirebaseService.fetchUserName();
 
       if (userName != null) {
-        state = AsyncValue.data(userName); // Kullanıcı adı başarıyla alındığında durum güncellenir
+        state = AsyncValue.data(userName);
       } else {
         state = const AsyncValue.error(
           'User not found.',
@@ -18,7 +18,7 @@ class HomeProvider extends StateNotifier<AsyncValue<String>> {
         ); // Kullanıcı bulunamazsa hata durumu
       }
     } catch (e) {
-      state = AsyncValue.error('Error fetching name: $e', StackTrace.empty); // Hata durumunda
+      state = AsyncValue.error('Error fetching name: $e', StackTrace.empty);
     }
   }
 }

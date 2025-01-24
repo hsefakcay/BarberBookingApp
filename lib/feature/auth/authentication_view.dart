@@ -46,7 +46,9 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                   padding: context.padding.normal,
                   child: firebase.LoginView(
                     action: AuthAction.signIn,
-                    providers: firebase.FirebaseUIAuth.providersFor(FirebaseAuth.instance.app),
+                    providers: firebase.FirebaseUIAuth.providersFor(
+                      FirebaseAuth.instance.app,
+                    ),
                   ),
                 ),
               ),

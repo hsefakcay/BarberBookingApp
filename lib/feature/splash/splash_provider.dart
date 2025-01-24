@@ -26,7 +26,8 @@ class SplashProvider extends StateNotifier<SplashState> {
   SplashProvider() : super(SplashState());
 
   Future<void> checkSplashState() async {
-    await Future.delayed(const Duration(seconds: 5), () {}); // Simüle edilmiş bir gecikme
+    await Future.delayed(const Duration(seconds: 5), () {});
+    // Simüle edilmiş bir gecikme
     state = SplashState().copyWith(
       isRedirectHome: true,
     );

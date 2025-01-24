@@ -33,10 +33,10 @@ class BarberShopService {
       if (response.statusCode == 201) {
         return BarberShop.fromJson(response.data?['data']['shop'] as Map<String, dynamic>);
       } else {
-        throw Exception("Failed to create barber shop");
+        throw Exception('Failed to create barber shop');
       }
     } catch (e) {
-      throw Exception("Error creating barber shop: $e");
+      throw Exception('Error creating barber shop: $e');
     }
   }
 }

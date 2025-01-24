@@ -2,6 +2,7 @@ import 'package:barber_booking_app/product/constants/color_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 
 class FirebaseService {
   static User? fetchCurrentUser() {
@@ -44,7 +45,7 @@ class FirebaseService {
               .toList();
           return favoriteBarbers;
         } else {
-          print('Favorite barbers field is either null or not a list.');
+          Logger('Favorite barbers field is either null or not a list.');
           return [];
         }
       } else {
@@ -169,7 +170,10 @@ class FirebaseService {
   }
 
 // Kullanıcı numarasını Firestore'da güncelleyen fonksiyon
-  static Future<void> updateUserPhoneNumber(String newNumber, BuildContext context) async {
+  static Future<void> updateUserPhoneNumber(
+    String newNumber,
+    BuildContext context,
+  ) async {
     final firestore = FirebaseFirestore.instance;
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
