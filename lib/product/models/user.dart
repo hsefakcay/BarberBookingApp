@@ -4,7 +4,7 @@ class User {
       required this.email,
       required this.phoneNumber,
       required this.favBarbersId,
-      required this.favBarberShopsId});
+      required this.favBarberShopsId,});
 
   final String name;
   final String email;

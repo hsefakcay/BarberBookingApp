@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
 class OnboardingButton extends StatelessWidget {
-  const OnboardingButton({required this.text, required this.onPressed, super.key});
+  const OnboardingButton({
+    required this.text,
+    required this.onPressed,
+    super.key,
+  });
   final String text;
   final VoidCallback onPressed;
 
@@ -19,16 +23,18 @@ class OnboardingButton extends StatelessWidget {
       child: Padding(
         padding: context.padding.low,
         child: ElevatedButton(
-          style: ElevatedButton.styleFrom(backgroundColor: ColorConstants.yellowColor),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: ColorConstants.yellowColor,
+          ),
           onPressed: onPressed,
           child: Padding(
             padding: context.padding.low,
             child: Text(
               text,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(color: ColorConstants.blackColor, fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: ColorConstants.blackColor,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
           ),
         ),

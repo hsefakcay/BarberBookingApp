@@ -4,6 +4,7 @@ import 'package:barber_booking_app/product/models/appointment.dart';
 import 'package:barber_booking_app/product/services/firebase_service.dart';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
+import 'package:logging/logging.dart';
 
 class AppointmentService {
   final Dio _dio = DioClient().dio;
@@ -42,7 +43,7 @@ class AppointmentService {
       }
     } catch (e) {
       // Hata durumunda bir exception fırlat
-      print('Error adding appointment: $e');
+      Logger('Error adding appointment: $e');
       return false;
     }
   }
@@ -80,7 +81,6 @@ class AppointmentService {
 
       if (response.statusCode == 200) {
         // response.data'ya direkt erişim yerine, önce verinin tipini kontrol et
-
         final appointmentJson = response.data as List<dynamic>;
         final list = appointmentJson
             .map((json) => Appointment.fromJson(json as Map<String, dynamic>))

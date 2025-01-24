@@ -9,10 +9,16 @@ class ServiceService {
   // Tüm servisleri çekme
   Future<List<Service>> fetchServices() async {
     try {
-      final response = await _dio.get<Map<String, dynamic>>(ApiEndpoints.getBarberServices);
+      final response = await _dio.get<Map<String, dynamic>>(
+        ApiEndpoints.getBarberServices,
+      );
       if (response.statusCode == 200) {
         final servicesJson = response.data?['data']['services'] as List<dynamic>;
-        return servicesJson.map((json) => Service.fromJson(json as Map<String, dynamic>)).toList();
+        return servicesJson
+            .map(
+              (json) => Service.fromJson(json as Map<String, dynamic>),
+            )
+            .toList();
       } else {
         throw Exception('Failed to load services');
       }
@@ -29,7 +35,9 @@ class ServiceService {
         data: service.toJson(),
       );
       if (response.statusCode == 201) {
-        return Service.fromJson(response.data?['data']['service'] as Map<String, dynamic>);
+        return Service.fromJson(
+          response.data?['data']['service'] as Map<String, dynamic>,
+        );
       } else {
         throw Exception('Failed to create service');
       }

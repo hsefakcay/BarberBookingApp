@@ -63,7 +63,9 @@ class BarberCard extends StatelessWidget {
         ),
         Text(
           '- ${barber.reviews} ${AppLocalizations.of(context)?.reviews}',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(color: ColorConstants.greyColor),
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: ColorConstants.greyColor,
+              ),
         ),
       ],
     );
@@ -77,7 +79,7 @@ class BarberCard extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(width: 1, color: ColorConstants.greyColor),
+          border: Border.all(color: ColorConstants.greyColor),
           borderRadius: BorderRadius.circular(5),
         ),
         child: Image.network(
@@ -85,7 +87,11 @@ class BarberCard extends StatelessWidget {
           width: context.general.mediaSize.height * 0.09,
           height: context.general.mediaSize.height * 0.09,
           fit: BoxFit.cover,
-          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+          loadingBuilder: (
+            BuildContext context,
+            Widget child,
+            ImageChunkEvent? loadingProgress,
+          ) {
             if (loadingProgress == null) {
               return child;
             } else {
@@ -99,8 +105,13 @@ class BarberCard extends StatelessWidget {
               );
             }
           },
-          errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+          errorBuilder: (
+            BuildContext context,
+            Object error,
+            StackTrace? stackTrace,
+          ) {
             return Image.asset(
+              // TO DO : update this url
               'assets/images/defaultBarber.jpg',
               fit: BoxFit.cover,
             );

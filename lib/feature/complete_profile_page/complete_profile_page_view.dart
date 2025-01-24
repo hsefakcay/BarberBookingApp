@@ -23,7 +23,9 @@ class _ProfilePageState extends State<CompleteProfilePage> {
 
   // Fotoğraf seçme fonksiyonu
   Future<void> _pickImage() async {
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
     if (pickedFile != null) {
       setState(() {
         _profileImage = File(pickedFile.path);
@@ -82,13 +84,17 @@ class _ProfilePageState extends State<CompleteProfilePage> {
             TextField(
               controller: _nameController,
               keyboardType: TextInputType.name,
-              decoration: const InputDecoration(labelText: StringConstants.name),
+              decoration: const InputDecoration(
+                labelText: StringConstants.name,
+              ),
             ),
             const SizedBox(height: 20),
             TextField(
               controller: _phoneNumberController,
               keyboardType: TextInputType.phone,
-              decoration: const InputDecoration(labelText: StringConstants.phoneNumber),
+              decoration: const InputDecoration(
+                labelText: StringConstants.phoneNumber,
+              ),
             ),
             const SizedBox(height: 20),
             OnboardingButton(
@@ -96,8 +102,14 @@ class _ProfilePageState extends State<CompleteProfilePage> {
               onPressed: () async {
                 // Bilgileri kaydetme işlemi
                 if (_nameController.text.isNotEmpty && _phoneNumberController.text.isNotEmpty) {
-                  await FirebaseService.updateUserName(_nameController.text, context);
-                  await FirebaseService.updateUserPhoneNumber(_phoneNumberController.text, context);
+                  await FirebaseService.updateUserName(
+                    _nameController.text,
+                    context,
+                  );
+                  await FirebaseService.updateUserPhoneNumber(
+                    _phoneNumberController.text,
+                    context,
+                  );
                   await Navigator.pushReplacementNamed(context, '/home');
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(

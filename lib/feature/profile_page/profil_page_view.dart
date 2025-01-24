@@ -29,7 +29,9 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
 
   // Fotoğraf seçme fonksiyonu
   Future<void> _pickImage() async {
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
     if (pickedFile != null) {
       setState(() {
         _profileImage = File(pickedFile.path);
@@ -79,7 +81,10 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
               onPressed: () async {
                 // Bilgileri kaydetme işlemi
                 if (_nameController.text.isNotEmpty) {
-                  await FirebaseService.updateUserName(_nameController.text, context);
+                  await FirebaseService.updateUserName(
+                    _nameController.text,
+                    context,
+                  );
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text(
@@ -90,7 +95,6 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                     ),
                   );
                   await Navigator.pushNamed(context, '/home');
-                  // Profil bilgilerini backend'e veya local storage'a kaydedebilirsin
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Please fill all fields')),
@@ -99,7 +103,9 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
               },
               child: Text(
                 'Save Changes',
-                style: const TextTheme().bodyLarge?.copyWith(color: ColorConstants.blackColor),
+                style: const TextTheme().bodyLarge?.copyWith(
+                      color: ColorConstants.blackColor,
+                    ),
               ),
             ),
           ],

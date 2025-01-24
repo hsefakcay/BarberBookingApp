@@ -38,7 +38,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
-                  child: CircularProgressIndicator(color: ColorConstants.yellowColor),
+                  child: CircularProgressIndicator(
+                    color: ColorConstants.yellowColor,
+                  ),
                 );
               }
               if (snapshot.hasError) {

@@ -96,8 +96,10 @@ class _HomeViewState extends ConsumerState<HomeView> with HomeViewMixin {
         ),
         Center(
           child: userNameState.when(
-            data: (name) =>
-                Text(name.toUpperCase(), style: Theme.of(context).textTheme.headlineLarge),
+            data: (name) => Text(
+              name.toUpperCase(),
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
             error: (error, _) => Text('Error: $error'),
             loading: () => const CircularProgressIndicator(),
           ),
@@ -117,8 +119,9 @@ class _HomeViewState extends ConsumerState<HomeView> with HomeViewMixin {
           padding: const EdgeInsets.all(6),
           child: Text(
             StringConstants.barberShops,
-            style:
-                Theme.of(context).textTheme.labelLarge?.copyWith(color: ColorConstants.greyColor),
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: ColorConstants.greyColor,
+                ),
           ),
         ),
         SizedBox(
@@ -155,7 +158,10 @@ class _HomeViewState extends ConsumerState<HomeView> with HomeViewMixin {
     );
   }
 
-  Column _latestVisitRow(AppLocalizations? appLocalizations, BuildContext context) {
+  Column _latestVisitRow(
+    AppLocalizations? appLocalizations,
+    BuildContext context,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -163,8 +169,9 @@ class _HomeViewState extends ConsumerState<HomeView> with HomeViewMixin {
           padding: const EdgeInsets.all(6),
           child: Text(
             StringConstants.barbers,
-            style:
-                Theme.of(context).textTheme.labelLarge?.copyWith(color: ColorConstants.greyColor),
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: ColorConstants.greyColor,
+                ),
           ),
         ),
         _barberListView(context.general.mediaSize.height),
@@ -196,7 +203,9 @@ class _HomeViewState extends ConsumerState<HomeView> with HomeViewMixin {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: CircularProgressIndicator(color: ColorConstants.yellowColor),
+              child: CircularProgressIndicator(
+                color: ColorConstants.yellowColor,
+              ),
             );
           }
           if (snapshot.hasError) {

@@ -35,7 +35,9 @@ List<String> generateDates(int numberOfDays) {
   final now = DateTime.now();
   return List.generate(
     numberOfDays,
-    (index) => DateFormat('d EEE MMMM y').format(now.add(Duration(days: index))),
+    (index) => DateFormat('d EEE MMMM y').format(
+      now.add(Duration(days: index)),
+    ),
   );
 }
 
@@ -109,7 +111,9 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
       padding: const EdgeInsets.only(top: 20, bottom: 7),
       child: Text(
         StringConstants.dateAndTime,
-        style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 22),
+        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontSize: 22,
+            ),
       ),
     );
   }
@@ -126,7 +130,9 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: ColorConstants.yellowColor),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorConstants.yellowColor,
+            ),
             onPressed: () async {
               await AppointmentService().addAppointment(
                 Appointment(
@@ -163,7 +169,10 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
         children: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.arrow_back_rounded, color: ColorConstants.yellowColor),
+            icon: const Icon(
+              Icons.arrow_back_rounded,
+              color: ColorConstants.yellowColor,
+            ),
           ),
           Text('${monthName.toUpperCase()}  ${now.year}'),
           IconButton(
@@ -210,7 +219,10 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
                         : selectedTime == timeSlots[index]
                             ? ColorConstants.yellowColor
                             : ColorConstants.borderDarkColor,
-                    border: Border.all(color: ColorConstants.greyButtonColor, width: 2),
+                    border: Border.all(
+                      color: ColorConstants.greyButtonColor,
+                      width: 2,
+                    ),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(

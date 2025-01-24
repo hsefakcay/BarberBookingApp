@@ -47,7 +47,7 @@ class AppTheme {
           ),
           enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: ColorConstants.greyColor),
-              borderRadius: BorderRadius.circular(15)),
+              borderRadius: BorderRadius.circular(15),),
           labelStyle:
               const TextStyle(color: ColorConstants.greyColor), // Input alanındaki etiket rengi
         ),

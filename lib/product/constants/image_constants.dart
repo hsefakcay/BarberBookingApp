@@ -1,8 +1,9 @@
 enum ImageConstants {
   barber('defaultBarber');
 
-  final String value;
   const ImageConstants(this.value);
+
+  final String value;
 
   String get toJpg => 'assets/images/$value.jpg';
 }

@@ -48,8 +48,16 @@ class _SettingsPageState extends State<SettingsPage> {
             title: StringConstants.notifications,
             onTap: () {},
           ),
-          CustomListTile(icon: Icons.language, title: StringConstants.language, onTap: () {}),
-          CustomListTile(icon: Icons.help, title: StringConstants.helpsAndSupport, onTap: () {}),
+          CustomListTile(
+            icon: Icons.language,
+            title: StringConstants.language,
+            onTap: () {},
+          ),
+          CustomListTile(
+            icon: Icons.help,
+            title: StringConstants.helpsAndSupport,
+            onTap: () {},
+          ),
           CustomListTile(
             icon: Icons.logout_outlined,
             title: StringConstants.logout,
