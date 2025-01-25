@@ -29,21 +29,19 @@ A comprehensive **Barber Booking Application** designed to provide a seamless bo
 ---
 ## 📜 API Endpoints
 
-User APIs
-- POST /api/users/register - User registration.
-- POST /api/users/login - User login.
-- POST /api/users/logout - User logout.
-- GET /api/users/profile - Get user profile.
+Appointments APIs
+![image](https://github.com/user-attachments/assets/1beca59e-9158-48aa-aff5-808ee6c6148e)
 
 Barber APIs
-- GET /api/barbers - List all barbers.
-- GET /api/barbers/:id - Get details of a specific barber.
-- GET /api/barbers/nearby - Find nearby barbers.
+![image](https://github.com/user-attachments/assets/aa010c6b-689e-4d4b-b919-46d4b9c94f4e)
 
-Appointment APIs
-- POST /api/appointments - Create a new appointment.
-- GET /api/appointments/:userId - Get all appointments for a user.
-http://localhost:5005/api-docs/
+
+Barber Services APIs
+![image](https://github.com/user-attachments/assets/7fd9be05-4110-400e-9567-e94774d8ad46)
+
+Barber Shops APIs
+![image](https://github.com/user-attachments/assets/6ce604c1-2115-48d2-aa69-73c1fdccc2f3)
+
 ---
 ## 🎥 Screenshots
 
