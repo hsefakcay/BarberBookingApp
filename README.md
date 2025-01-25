@@ -17,7 +17,7 @@ A comprehensive **Barber Booking Application** designed to provide a seamless bo
 
 ---
 ##  🛠️ Technologies Used
-- **Flutter* : For cross-platform application development.
+- **Flutter** : For cross-platform application development.
 - Firebase Auth: For secure user authentication.
 - Firebase Firestore: For storing user-specific data like favorites and past appointments.
 - MongoDB: For managing barbers and barbershop data.
