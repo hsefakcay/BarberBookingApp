@@ -18,13 +18,12 @@ A comprehensive **Barber Booking Application** designed to provide a seamless bo
 ---
 ##  🛠️ Technologies Used
 - **Flutter** : For cross-platform application development.
-- Firebase Auth: For secure user authentication.
-- Firebase Firestore: For storing user-specific data like favorites and past appointments.
-- MongoDB: For managing barbers and barbershop data.
-- Node.js + Express: Backend API development.
-- Bloc: State management for a structured app architecture.
-- Google Maps API: For location-based search and navigation.
-- Lottie: For smooth animations and a polished user experience.
+- **Firebase Auth** : For secure user authentication.
+- **Firebase Firestore** : For storing user-specific data like favorites and past appointments.
+- **MongoDB**: For managing barbers and barbershop data.
+- **Node.js + Express**s : Backend API development.
+- **Riverpod**: State management for a structured app architecture.
+- **Google Maps API** : For location-based search and navigation.
 
 ---
 ## 📜 API Endpoints
