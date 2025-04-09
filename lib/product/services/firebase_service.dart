@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 
 class FirebaseService {
+  
   static User? fetchCurrentUser() {
     return FirebaseAuth.instance.currentUser;
   }
@@ -41,7 +42,7 @@ class FirebaseService {
           final favoriteBarbers = (data['favorite_barbers'] as List<dynamic>)
               .map((e) => e.toString()) // Elemanları String'e dönüştür
               .toList();
-          return favoriteBarbers;
+          return favoriteBarbers.isEmpty ? [] : favoriteBarbers;
         } else {
           Logger('Favorite barbers field is either null or not a list.');
           return [];

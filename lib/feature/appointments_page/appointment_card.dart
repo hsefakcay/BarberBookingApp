@@ -18,7 +18,7 @@ class AppointmentCard extends StatelessWidget {
           children: [
             Text(
               // TO DO: fetch barber data
-              appointment.barberId,
+              appointment.barberId.toString(),
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
