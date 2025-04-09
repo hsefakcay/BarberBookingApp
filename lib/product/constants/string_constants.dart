@@ -23,7 +23,7 @@ class StringConstants {
   static const language = 'Language';
   static const helpsAndSupport = 'Help & Support';
   static const logout = 'Logout';
-
+  
   //appointments
   static const appointments = 'Appointments';
   static const yourAppointments = 'Your Appointments';

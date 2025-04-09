@@ -13,7 +13,8 @@ class ServiceService {
         ApiEndpoints.getBarberServices,
       );
       if (response.statusCode == 200) {
-        final servicesJson = response.data?['data']['services'] as List<dynamic>;
+        final data = response.data?['data'] as Map<String, dynamic>;
+        final servicesJson = data['services'] as List<dynamic>;
         return servicesJson
             .map(
               (json) => Service.fromJson(json as Map<String, dynamic>),
@@ -35,8 +36,9 @@ class ServiceService {
         data: service.toJson(),
       );
       if (response.statusCode == 201) {
+        final data = response.data?['data'] as Map<String, dynamic>;
         return Service.fromJson(
-          response.data?['data']['service'] as Map<String, dynamic>,
+          data['service'] as Map<String, dynamic>,
         );
       } else {
         throw Exception('Failed to create service');

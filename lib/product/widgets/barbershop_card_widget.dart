@@ -166,7 +166,7 @@ class BarberShopCard extends StatelessWidget {
     double width,
   ) {
     return Container(
-      width: width * 0.39,
+      width: width * 0.38,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: ColorConstants.yellowColor,

@@ -12,7 +12,20 @@
           "package_name": "com.example.barber_booking_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "287734215255-mn0hhuk63ab5athoob8g5n84dht8l01v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.barber_booking_app",
+            "certificate_hash": "160f7812557f9b67591425cb76475e2a9293e121"
+          }
+        },
+        {
+          "client_id": "287734215255-tgc6ntda705f7ie33441777uhe2n5an5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCdst_VouXKlEQ9GFGJozUsigBs8CFkTtk"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "287734215255-tgc6ntda705f7ie33441777uhe2n5an5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "287734215255-4jvuq51qnp0c0tjbt4539trq0h55bikt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.barberBookingApp"
+              }
+            }
+          ]
         }
       }
     }

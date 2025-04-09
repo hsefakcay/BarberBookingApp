@@ -35,7 +35,9 @@ class AppTheme {
             ),
           ),
         ),
-        indicatorColor: ColorConstants.yellowColor,
+        tabBarTheme: const TabBarThemeData(
+          indicatorColor: ColorConstants.yellowColor,
+        ),
         inputDecorationTheme: InputDecorationTheme(
           focusColor: ColorConstants.yellowColor,
           fillColor: ColorConstants.darkGreyColor,
@@ -46,8 +48,9 @@ class AppTheme {
             borderRadius: BorderRadius.circular(12),
           ),
           enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: ColorConstants.greyColor),
-              borderRadius: BorderRadius.circular(15),),
+            borderSide: const BorderSide(color: ColorConstants.greyColor),
+            borderRadius: BorderRadius.circular(15),
+          ),
           labelStyle:
               const TextStyle(color: ColorConstants.greyColor), // Input alanındaki etiket rengi
         ),

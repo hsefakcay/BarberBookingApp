@@ -11,7 +11,8 @@ class BarberShopService {
     try {
       final response = await _dio.get<Map<String, dynamic>>(ApiEndpoints.getBarberShops);
       if (response.statusCode == 200) {
-        final barberShopJson = response.data?['data']['shops'] as List<dynamic>;
+        final data = response.data?['data'] as Map<String, dynamic>;
+        final barberShopJson = data['shops'] as List<dynamic>;
         return barberShopJson
             .map((json) => BarberShop.fromJson(json as Map<String, dynamic>))
             .toList();
@@ -31,7 +32,8 @@ class BarberShopService {
         data: barberShop.toJson(),
       );
       if (response.statusCode == 201) {
-        return BarberShop.fromJson(response.data?['data']['shop'] as Map<String, dynamic>);
+        final data = response.data?['data'] as Map<String, dynamic>;
+        return BarberShop.fromJson(data['shop'] as Map<String, dynamic>);
       } else {
         throw Exception('Failed to create barber shop');
       }

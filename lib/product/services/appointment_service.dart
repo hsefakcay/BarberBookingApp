@@ -41,16 +41,16 @@ class AppointmentService {
       } else {
         throw Exception('Failed to add appointment. Status code: ${response.statusCode}');
       }
-    } catch (e) {
+    } on () {
       // Hata durumunda bir exception fırlat
-      Logger('Error adding appointment: $e');
+      Logger('Error adding appointment');
       return false;
     }
   }
 
   Future<List<String>> fetchBookedTimesByBarber(String barberId, String date) async {
     try {
-      final response = await _dio.get(
+      final response = await _dio.get<Map<String, dynamic>>(
         '${ApiEndpoints.getAppointments}?barberId=$barberId&date=${formatDate(date)}',
       );
 
@@ -75,13 +75,13 @@ class AppointmentService {
   Future<List<Appointment>> fetchBookedDatesByUser() async {
     final userId = FirebaseService.fetchCurrentUser()?.uid ?? '';
     try {
-      final response = await _dio.get(
+      final response = await _dio.get<List<dynamic>>(
         '${ApiEndpoints.getAppointments}/user/$userId',
       );
 
       if (response.statusCode == 200) {
         // response.data'ya direkt erişim yerine, önce verinin tipini kontrol et
-        final appointmentJson = response.data as List<dynamic>;
+        final appointmentJson = response.data!;
         final list = appointmentJson
             .map((json) => Appointment.fromJson(json as Map<String, dynamic>))
             .toList();

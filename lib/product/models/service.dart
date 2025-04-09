@@ -1,23 +1,23 @@
 class Service {
   Service({
-    required this.id,
     required this.name,
     required this.price,
     required this.duration,
+    this.id,
   });
 
   factory Service.fromJson(Map<String, dynamic> json) {
     return Service(
-      id: json['_id'] as String,
+      id: json['_id'] as int,
       name: json['name'] as String,
-      price: json['price'] as int,
-      duration: json['duration'] as int,
+      price: json['price'] as double,
+      duration: json['duration'] as double,
     );
   }
-  final String id;
+  int? id;
   final String name;
-  final int price;
-  final int duration;
+  final double price;
+  final double duration;
 
   Map<String, dynamic> toJson() {
     return {

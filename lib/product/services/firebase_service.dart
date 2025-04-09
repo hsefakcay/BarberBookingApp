@@ -1,4 +1,3 @@
-import 'package:barber_booking_app/product/constants/color_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,15 +19,14 @@ class FirebaseService {
         },
       );
     } catch (e) {
-      print('Error adding favorite barber: $e');
+      throw Exception('Error adding favorite barber: $e');
     }
   }
 
   static Future<List<String>> fetchFavoriteBarbers() async {
     final userId = fetchCurrentUser()?.uid ?? ''; // Geçerli kullanıcının UID'sini al
     if (userId.isEmpty) {
-      print('User ID is empty. Please ensure the user is logged in.');
-      return [];
+      throw Exception('User ID is empty. Please ensure the user is logged in.');
     }
     final DocumentReference userDoc = FirebaseFirestore.instance.collection('users').doc(userId);
     try {
@@ -49,11 +47,11 @@ class FirebaseService {
           return [];
         }
       } else {
-        print('User document does not exist or has no data.');
+        Logger('User document does not exist or has no data.');
         return [];
       }
-    } catch (e) {
-      print('Error fetching favorite barbers: $e');
+    } on () {
+      Logger('Error fetching favorite barbers: ');
       return [];
     }
   }
@@ -64,7 +62,7 @@ class FirebaseService {
 
     try {
       if (userId.isEmpty) {
-        print('User is not logged in.');
+        Logger('User is not logged in.');
         return;
       }
 
@@ -73,9 +71,9 @@ class FirebaseService {
         'favorite_barbers': FieldValue.arrayRemove([barberId]),
       });
 
-      print('Barber removed from favorites successfully!');
-    } catch (e) {
-      print('Error removing favorite barber: $e');
+      Logger('Barber removed from favorites successfully!');
+    } on () {
+      Logger('Error removing favorite barber: ');
     }
   }
 
@@ -85,7 +83,7 @@ class FirebaseService {
 
     try {
       if (userId.isEmpty) {
-        print('User is not logged in.');
+        Logger('User is not logged in.');
         return false;
       }
 
@@ -98,8 +96,8 @@ class FirebaseService {
 
       // Eğer belge varsa, barberId favori listesindedir
       return querySnapshot.docs.isNotEmpty;
-    } catch (e) {
-      print('Error checking favorite barber: $e');
+    } on () {
+      Logger('Error checking favorite barber:');
       return false;
     }
   }
@@ -120,7 +118,7 @@ class FirebaseService {
       } else {
         return null;
       }
-    } catch (e) {
+    } on () {
       return null;
     }
   }
@@ -152,35 +150,19 @@ class FirebaseService {
         // Firestore'da adı güncelle
         await userDoc.update({'name': newName});
       }
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'Name updated successfully!',
-            style: TextStyle(color: ColorConstants.whiteColor),
-          ),
-          backgroundColor: ColorConstants.darkGreyColor,
-        ),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error updating name: $e')),
-      );
+    } on FirebaseException catch (e) {
+      throw UserUpdateException(e.message);
     }
   }
 
 // Kullanıcı numarasını Firestore'da güncelleyen fonksiyon
   static Future<void> updateUserPhoneNumber(
     String newNumber,
-    BuildContext context,
   ) async {
     final firestore = FirebaseFirestore.instance;
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('User is not logged in.')),
-      );
-      return;
+      throw Exception('user is null ');
     }
     try {
       // Kullanıcı belgesi
@@ -199,10 +181,22 @@ class FirebaseService {
         // Firestore'da numarayı güncelle
         await userDoc.update({'phoneNumber': newNumber});
       }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error updating name: $e')),
-      );
+    } on FirebaseException catch (e) {
+      throw Exception('Error Updating user name: ${e.message}');
     }
   }
+}
+
+// Özel Hata Sınıfları
+class UserNotLoggedInException implements Exception {
+  @override
+  String toString() => 'Kullanıcı giriş yapmamış.';
+}
+
+class UserUpdateException implements Exception {
+  UserUpdateException(this.message);
+  final String? message;
+
+  @override
+  String toString() => "Ad güncellenemedi: ${message ?? 'Bilinmeyen hata'}";
 }
