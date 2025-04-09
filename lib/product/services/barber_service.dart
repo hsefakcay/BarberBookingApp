@@ -12,8 +12,11 @@ class BarberService {
     try {
       final response = await _dio.get<Map<String, dynamic>>(ApiEndpoints.getBarbers);
       if (response.statusCode == 200) {
-        final barbersJson = response.data?['data']['barbers'] as List<dynamic>;
-        return barbersJson.map((json) => Barber.fromJson(json as Map<String, dynamic>)).toList();
+        final dataData = response.data?['data'] as Map<String, dynamic>; // Explicit cast
+        final barbersList = (dataData['barbers'] as List)
+            .map((barber) => Barber.fromJson(barber as Map<String, dynamic>))
+            .toList();
+        return barbersList;
       } else {
         throw Exception('Failed to load barbers');
       }
@@ -30,7 +33,8 @@ class BarberService {
         data: barber.toJson(),
       );
       if (response.statusCode == 201) {
-        return Barber.fromJson(response.data?['data']['services'] as Map<String, dynamic>);
+        final dataData = response.data?['data'] as Map<String, dynamic>; // Explicit cast
+        return Barber.fromJson(dataData['services'] as Map<String, dynamic>);
       } else {
         throw Exception('Failed to create barber');
       }
@@ -56,18 +60,18 @@ class BarberService {
         );
 
         if (response.statusCode == 200) {
-          final barberJson = response.data?['data']['barber'] as Map<String, dynamic>;
+          final dataData = response.data?['data'] as Map<String, dynamic>; // Explicit cast
+          final barberJson = dataData['barber'] as Map<String, dynamic>;
           final barber = Barber.fromJson(barberJson);
           favoriteBarbers.add(barber);
         } else {
-          print('Failed to fetch barber with ID: $barberId');
+          throw Exception('Failed to fetch barber with ID: $barberId');
         }
       }
 
       return favoriteBarbers;
     } catch (e) {
-      print('Error fetching favorite barber details: $e');
-      return [];
+      throw Exception('Error fetching favorite barber details: $e');
     }
   }
 }

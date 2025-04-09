@@ -1,4 +1,3 @@
-import 'package:barber_booking_app/feature/barber_detail_page/barber_detail_page_mixin.dart';
 import 'package:barber_booking_app/feature/barber_detail_page/widgets/bottom_sheet_widget.dart';
 import 'package:barber_booking_app/feature/barber_detail_page/widgets/pro_barber_label.dart';
 import 'package:barber_booking_app/product/constants/color_constants.dart';
@@ -19,7 +18,7 @@ class BarberDetailPage extends StatefulWidget {
   State<BarberDetailPage> createState() => _BarberDetailPageState();
 }
 
-class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPageMixin {
+class _BarberDetailPageState extends State<BarberDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +73,7 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
                         SizedBox(
                           height: context.general.mediaSize.height * 0.03,
                         ),
-                        _serviceOptionsList(context),
+                        _serviceOptionsList(context, widget.barber),
                       ],
                     ),
                   ],
@@ -87,7 +86,7 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
     );
   }
 
-  Container _serviceOptionsList(BuildContext context) {
+  Container _serviceOptionsList(BuildContext context, Barber barber) {
     return Container(
       height: MediaQuery.sizeOf(context).height * 0.35,
       decoration: BoxDecoration(
@@ -97,67 +96,50 @@ class _BarberDetailPageState extends State<BarberDetailPage> with BarberDetailPa
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 3),
-        child: FutureBuilder(
-          future: services,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            if (snapshot.hasError) {
-              return const Center(child: Placeholder());
-            }
-
-            if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(child: Text('No barbers found'));
-            }
-            final services = snapshot.data!;
-            return ListView.builder(
-              padding: EdgeInsets.zero,
-              itemCount: services.length,
-              itemBuilder: (context, index) {
-                final service = services[index];
-                return Column(
-                  children: [
-                    SwitchListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 12,
+        child: ListView.builder(
+          padding: EdgeInsets.zero,
+          itemCount: barber.services.length,
+          itemBuilder: (context, index) {
+            final service = barber.services[index];
+            return Column(
+              children: [
+                SwitchListTile(
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                  ),
+                  title: Text(
+                    service.name,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  subtitle: Row(
+                    children: [
+                      Text(
+                        '\$ ${service.price}',
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
-                      title: Text(
-                        service.name,
-                        style: Theme.of(context).textTheme.bodyLarge,
+                      Text(
+                        ' - ${service.duration} min',
+                        style: Theme.of(context).textTheme.labelSmall,
                       ),
-                      subtitle: Row(
-                        children: [
-                          Text(
-                            '\$ ${service.price}',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          Text(
-                            ' - ${service.duration} min',
-                            style: Theme.of(context).textTheme.labelSmall,
-                          ),
-                        ],
-                      ),
-                      value: true, // Her öğe için durum
-                      activeColor: Colors.yellow,
-                      onChanged: (newValue) {
-                        setState(() {
-                          // service.isSelected = newValue; // Durum güncelleniyor
-                        });
-                      },
-                    ),
-                    const SizedBox(
-                      height: 1,
-                      child: Divider(
-                        color: ColorConstants.greyColor,
-                        indent: 10,
-                        endIndent: 10,
-                      ),
-                    ),
-                  ],
-                );
-              },
+                    ],
+                  ),
+                  value: true, // Her öğe için durum
+                  activeColor: Colors.yellow,
+                  onChanged: (newValue) {
+                    setState(() {
+                      // service.isSelected = newValue; // Durum güncelleniyor
+                    });
+                  },
+                ),
+                const SizedBox(
+                  height: 1,
+                  child: Divider(
+                    color: ColorConstants.greyColor,
+                    indent: 10,
+                    endIndent: 10,
+                  ),
+                ),
+              ],
             );
           },
         ),

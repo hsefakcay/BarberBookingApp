@@ -1,4 +1,3 @@
-import 'package:barber_booking_app/product/models/barbershop.dart';
 import 'package:barber_booking_app/product/models/service.dart';
 
 class Barber {
@@ -8,30 +7,30 @@ class Barber {
     required this.photo,
     required this.ratings,
     required this.reviews,
-    required this.barberShop,
+    required this.barberShopId,
     required this.services,
   });
 
   // JSON'dan Dart objesine dönüştürme
   factory Barber.fromJson(Map<String, dynamic> json) {
     return Barber(
-      id: json['_id'] as String,
+      id: json['_id'] as int,
       name: json['name'] as String,
       photo: json['photo'] as String,
       ratings: (json['ratings'] as num).toDouble(),
-      reviews: json['reviews'] as int,
-      barberShop: BarberShop.fromJson(json['barberShop'] as Map<String, dynamic>),
+      reviews: json['reviews'] as double,
+      barberShopId: json['barberShopId'] as int,
       services: (json['services'] as List)
           .map((service) => Service.fromJson(service as Map<String, dynamic>))
           .toList(),
     );
   }
-  final String id;
+  final int id;
   final String name;
   final String photo;
   final double ratings;
-  final int reviews;
-  final BarberShop barberShop;
+  final double reviews;
+  final int barberShopId;
   final List<Service> services;
 
   // Dart objesinden JSON'a dönüştürme
@@ -42,7 +41,7 @@ class Barber {
       'photo': photo,
       'ratings': ratings,
       'reviews': reviews,
-      'barberShop': barberShop.toJson(),
+      'barberShopId': barberShopId,
       'services': services.map((service) => service.toJson()).toList(),
     };
   }

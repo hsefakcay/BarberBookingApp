@@ -12,10 +12,10 @@ class CompleteProfilePage extends StatefulWidget {
   const CompleteProfilePage({super.key});
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  ProfilePageState createState() => ProfilePageState();
 }
 
-class _ProfilePageState extends State<CompleteProfilePage> {
+class ProfilePageState extends State<CompleteProfilePage> {
   File? _profileImage; // Profil fotoğrafı için değişken
 
   final TextEditingController _nameController = TextEditingController();
@@ -108,7 +108,6 @@ class _ProfilePageState extends State<CompleteProfilePage> {
                   );
                   await FirebaseService.updateUserPhoneNumber(
                     _phoneNumberController.text,
-                    context,
                   );
                   await Navigator.pushReplacementNamed(context, '/home');
                 } else {

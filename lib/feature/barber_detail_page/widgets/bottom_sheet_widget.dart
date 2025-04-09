@@ -66,7 +66,7 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
   }
 
   Future<void> fetchBookedTimes() async {
-    final times = await getBookedTimes(widget.barber.id, selectedDate);
+    final times = await getBookedTimes(widget.barber.id.toString(), selectedDate);
     setState(() {
       bookedTimes = times;
     });
@@ -137,7 +137,7 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
               await AppointmentService().addAppointment(
                 Appointment(
                   userId: FirebaseService.fetchCurrentUser()?.uid ?? '',
-                  barberId: widget.barber.id,
+                  barberId: widget.barber.id.toString(),
                   date: selectedDate,
                   time: selectedTime,
                 ),
@@ -262,7 +262,7 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
                   setState(() {
                     selectedDate = dates[index];
                     monthName = selectedDate.substring(6, 14);
-                    getBookedTimes(widget.barber.id, selectedDate);
+                    getBookedTimes(widget.barber.id.toString(), selectedDate);
                     fetchBookedTimes();
                   });
                 },

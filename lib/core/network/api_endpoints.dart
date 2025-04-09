@@ -1,6 +1,6 @@
 class ApiEndpoints {
-  static const String getBarbers = '/barbers';
-  static const String getBarberServices = '/barberservices';
-  static const String getBarberShops = '/barbershops';
-  static const String getAppointments = '/appointments';
+  static const String getBarbers = '/barber';
+  static const String getBarberServices = '/barberservice';
+  static const String getBarberShops = '/barbershop';
+  static const String getAppointments = '/appointment';
 }

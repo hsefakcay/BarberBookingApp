@@ -24,7 +24,7 @@ class _SaveButtonState extends State<SaveButton> {
   }
 
   Future<void> _checkFavoriteStatus() async {
-    final result = await FirebaseService.isFavoriteBarber(widget.barber.id);
+    final result = await FirebaseService.isFavoriteBarber(widget.barber.id.toString());
     setState(() {
       isFavoriteAdded = result; // Ekranı güncelle
     });
@@ -42,8 +42,8 @@ class _SaveButtonState extends State<SaveButton> {
           });
           // Favorilere ekleme işlemi
           isFavoriteAdded == true
-              ? FirebaseService.addFavoriteBarber(widget.barber.id)
-              : FirebaseService.deleteFavoriteBarber(widget.barber.id);
+              ? FirebaseService.addFavoriteBarber(widget.barber.id.toString())
+              : FirebaseService.deleteFavoriteBarber(widget.barber.id.toString());
         },
         child: _saveIcon(),
       ),
