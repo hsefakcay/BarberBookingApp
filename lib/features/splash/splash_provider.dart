@@ -2,21 +2,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SplashState {
   SplashState({
-    this.isReaquiredForceUpdate,
+    this.isRequiredForceUpdate,
     this.isRedirectHome,
   });
 
-  final bool? isReaquiredForceUpdate;
+  final bool? isRequiredForceUpdate;
   final bool? isRedirectHome;
 
-  List<Object?> get props => [isReaquiredForceUpdate];
+  List<Object?> get props => [isRequiredForceUpdate];
 
   SplashState copyWith({
     bool? isReaquiredForceUpdate,
     bool? isRedirectHome,
   }) {
     return SplashState(
-      isReaquiredForceUpdate: isReaquiredForceUpdate ?? this.isReaquiredForceUpdate,
+      isRequiredForceUpdate: isReaquiredForceUpdate ?? isRequiredForceUpdate,
       isRedirectHome: isRedirectHome ?? this.isRedirectHome,
     );
   }
@@ -26,7 +26,7 @@ class SplashProvider extends StateNotifier<SplashState> {
   SplashProvider() : super(SplashState());
 
   Future<void> checkSplashState() async {
-    await Future.delayed(const Duration(seconds: 5), () {});
+    await Future.delayed(const Duration(seconds: 7), () {});
     // Simüle edilmiş bir gecikme
     state = SplashState().copyWith(
       isRedirectHome: true,

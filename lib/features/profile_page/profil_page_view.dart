@@ -1,25 +1,31 @@
 import 'dart:io';
-import 'package:barber_booking_app/feature/onboarding/widgets/onboarding_button.dart';
+
+import 'package:barber_booking_app/features/home_page/home_provider.dart';
 import 'package:barber_booking_app/product/constants/color_constants.dart';
-import 'package:barber_booking_app/product/constants/string_constants.dart';
-import 'package:barber_booking_app/product/enums/icon_size.dart';
 import 'package:barber_booking_app/product/services/firebase_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:kartal/kartal.dart';
 
-class CompleteProfilePage extends StatefulWidget {
-  const CompleteProfilePage({super.key});
+class ProfilePage extends ConsumerStatefulWidget {
+  const ProfilePage({super.key});
 
   @override
-  ProfilePageState createState() => ProfilePageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _ProfilePageState();
 }
 
-class ProfilePageState extends State<CompleteProfilePage> {
+class _ProfilePageState extends ConsumerState<ProfilePage> {
   File? _profileImage; // Profil fotoğrafı için değişken
-
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _phoneNumberController = TextEditingController();
+  final homeProvider = StateNotifierProvider<HomeProvider, AsyncValue<String>>(
+    (ref) => HomeProvider(),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    ref.read(homeProvider.notifier).fetchUserName();
+  }
 
   // Fotoğraf seçme fonksiyonu
   Future<void> _pickImage() async {
@@ -36,30 +42,13 @@ class ProfilePageState extends State<CompleteProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Edit Profile'),
+      ),
       body: Padding(
-        padding: context.padding.medium,
+        padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
-            Padding(
-              padding: context.padding.normal,
-              child: Column(
-                children: [
-                  Text(
-                    StringConstants.completeProfileTitle,
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                  Text(
-                    textAlign: TextAlign.center,
-                    StringConstants.completeProfileSubTitle,
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelLarge
-                        ?.copyWith(color: ColorConstants.greyColor),
-                  ),
-                ],
-              ),
-            ),
             Center(
               child: GestureDetector(
                 onTap: _pickImage, // Fotoğraf yükleme işlemini başlatır
@@ -74,7 +63,7 @@ class ProfilePageState extends State<CompleteProfilePage> {
                     child: CircleAvatar(
                       radius: 18,
                       backgroundColor: Colors.grey[200],
-                      child: Icon(Icons.camera_alt, size: IconSize.small.value),
+                      child: const Icon(Icons.camera_alt, size: 20),
                     ),
                   ),
                 ),
@@ -83,39 +72,41 @@ class ProfilePageState extends State<CompleteProfilePage> {
             const SizedBox(height: 20),
             TextField(
               controller: _nameController,
-              keyboardType: TextInputType.name,
               decoration: const InputDecoration(
-                labelText: StringConstants.name,
+                labelText: 'Name',
               ),
             ),
-            const SizedBox(height: 20),
-            TextField(
-              controller: _phoneNumberController,
-              keyboardType: TextInputType.phone,
-              decoration: const InputDecoration(
-                labelText: StringConstants.phoneNumber,
-              ),
-            ),
-            const SizedBox(height: 20),
-            OnboardingButton(
-              text: StringConstants.completeProfile,
+            const SizedBox(height: 10),
+            ElevatedButton(
               onPressed: () async {
                 // Bilgileri kaydetme işlemi
-                if (_nameController.text.isNotEmpty && _phoneNumberController.text.isNotEmpty) {
+                if (_nameController.text.isNotEmpty) {
                   await FirebaseService.updateUserName(
                     _nameController.text,
                     context,
                   );
-                  await FirebaseService.updateUserPhoneNumber(
-                    _phoneNumberController.text,
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        'Profile updated!',
+                        style: TextStyle(color: ColorConstants.whiteColor),
+                      ),
+                      backgroundColor: ColorConstants.darkGreyColor,
+                    ),
                   );
-                  await Navigator.pushReplacementNamed(context, '/home');
+                  await Navigator.pushNamed(context, '/home');
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Please fill all fields')),
                   );
                 }
               },
+              child: Text(
+                'Save Changes',
+                style: const TextTheme().bodyLarge?.copyWith(
+                      color: ColorConstants.blackColor,
+                    ),
+              ),
             ),
           ],
         ),

@@ -1,5 +1,5 @@
-import 'package:barber_booking_app/feature/onboarding/onboarding_page_view.dart';
-import 'package:barber_booking_app/feature/splash/splash_provider.dart';
+import 'package:barber_booking_app/features/onboarding/onboarding_page_view.dart';
+import 'package:barber_booking_app/features/splash/splash_provider.dart';
 import 'package:barber_booking_app/product/constants/color_constants.dart';
 import 'package:barber_booking_app/product/constants/string_constants.dart';
 import 'package:barber_booking_app/product/widgets/text/wavy_text.dart';
@@ -29,7 +29,7 @@ class _SplashViewState extends ConsumerState<SplashView> {
     ref.listen(
       splashProvider,
       (previous, next) {
-        if (next.isReaquiredForceUpdate ?? false) {
+        if (next.isRequiredForceUpdate ?? false) {
           showAboutDialog(context: context);
           return;
         }

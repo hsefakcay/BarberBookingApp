@@ -1,4 +1,4 @@
-import 'package:barber_booking_app/feature/auth/authentication_view.dart';
+import 'package:barber_booking_app/features/auth/authentication_view.dart';
 import 'package:barber_booking_app/product/constants/string_constants.dart';
 import 'package:barber_booking_app/product/widgets/custom_list_tile_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -80,7 +80,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 );
               }
             },
-          ),
+          ), 
         ],
       ),
     );

@@ -1,4 +1,4 @@
-import 'package:barber_booking_app/feature/appointments_page/appointment_list_view.dart';
+import 'package:barber_booking_app/features/appointments_page/appointment_list_view.dart';
 import 'package:barber_booking_app/product/constants/color_constants.dart';
 import 'package:barber_booking_app/product/constants/string_constants.dart';
 import 'package:flutter/material.dart';

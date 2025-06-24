@@ -20,55 +20,62 @@ class AppointmentService {
     }
   }
 
+  // Add new appointment
   Future<bool> addAppointment(Appointment appointment) async {
     try {
       final formattedDate = formatDate(appointment.date);
-      final data = {
-        'barberId': appointment.barberId,
-        'userId': appointment.userId,
-        'date': formattedDate,
-        'time': appointment.time,
-      };
+      final data = appointment.toJson();
+      data['date'] = formattedDate;
 
       // POST isteğini gönderiyoruz
-      final response = await _dio.post<Map<String, dynamic>>(
+      final response = await _dio.post(
         ApiEndpoints.getAppointments,
         data: data,
       );
-      // Başarılı bir cevap aldıysak (201 veya 200), `true` döndür
+
       if (response.statusCode == 201 || response.statusCode == 200) {
         return true;
       } else {
         throw Exception('Failed to add appointment. Status code: ${response.statusCode}');
       }
-    } on () {
-      // Hata durumunda bir exception fırlat
-      Logger('Error adding appointment');
+    } on DioException catch (dioError) {
+      // Fix syntax here
+      Logger('''
+              Dio Error!
+              Status: ${dioError.response?.statusCode}
+              Data: ${dioError.response?.data}
+              Message: ${dioError.message}
+              ''');
+      return false;
+    } catch (e) {
+      Logger('Unexpected error: $e');
       return false;
     }
   }
 
   Future<List<String>> fetchBookedTimesByBarber(String barberId, String date) async {
     try {
-      final response = await _dio.get<Map<String, dynamic>>(
+      final response = await _dio.get<List<dynamic>>(
         '${ApiEndpoints.getAppointments}?barberId=$barberId&date=${formatDate(date)}',
       );
 
       if (response.statusCode == 200) {
-        // response.data'ya direkt erişim yerine, önce verinin tipini kontrol et
+        // Response.data'ya direkt erişim yerine, önce verinin tipini kontrol et
         final dynamic data = response.data;
 
         // Eğer veri bir List ise, her öğeyi String'e dönüştür
         if (data is List) {
-          return data.map((e) => e.toString()).toList();
+          return data.map((e) => e['time'].toString()).toList();
         } else {
           throw Exception('Expected a list of strings');
         }
       } else {
         throw Exception('Failed to fetch booked times. Status code: ${response.statusCode}');
       }
+    } on DioException catch (e) {
+      throw Exception('Dio Error: ${e.message}');
     } catch (e) {
-      throw Exception('Failed to fetch booked times: $e');
+      throw Exception('Unexpected error: $e');
     }
   }
 
@@ -80,7 +87,7 @@ class AppointmentService {
       );
 
       if (response.statusCode == 200) {
-        // response.data'ya direkt erişim yerine, önce verinin tipini kontrol et
+        // Response.data'ya direkt erişim yerine, önce verinin tipini kontrol et
         final appointmentJson = response.data!;
         final list = appointmentJson
             .map((json) => Appointment.fromJson(json as Map<String, dynamic>))

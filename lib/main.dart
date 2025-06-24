@@ -1,4 +1,4 @@
-import 'package:barber_booking_app/feature/auth/authentication_view.dart';
+import 'package:barber_booking_app/features/auth/authentication_view.dart';
 import 'package:barber_booking_app/product/constants/string_constants.dart';
 import 'package:barber_booking_app/product/constants/themes.dart';
 import 'package:barber_booking_app/product/initialize/application_start.dart';

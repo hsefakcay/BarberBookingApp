@@ -1,6 +1,6 @@
-import 'package:barber_booking_app/feature/onboarding/onboarding_screen.dart';
-import 'package:barber_booking_app/feature/onboarding/widgets/onboarding_button.dart';
-import 'package:barber_booking_app/feature/onboarding/widgets/onboarding_indicator.dart';
+import 'package:barber_booking_app/features/onboarding/onboarding_screen.dart';
+import 'package:barber_booking_app/features/onboarding/widgets/onboarding_button.dart';
+import 'package:barber_booking_app/features/onboarding/widgets/onboarding_indicator.dart';
 import 'package:barber_booking_app/product/constants/string_constants.dart';
 import 'package:flutter/material.dart';
 

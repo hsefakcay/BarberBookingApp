@@ -136,8 +136,8 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
             onPressed: () async {
               await AppointmentService().addAppointment(
                 Appointment(
-                  userId: FirebaseService.fetchCurrentUser()?.uid ?? '',
-                  barberId: widget.barber.id.toString(),
+                  userId: FirebaseService.fetchCurrentUser()!.uid ,
+                  barberId: widget.barber.id,
                   date: selectedDate,
                   time: selectedTime,
                 ),

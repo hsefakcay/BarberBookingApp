@@ -1,5 +1,5 @@
-import 'package:barber_booking_app/feature/appointments_page/appointment_card.dart';
-import 'package:barber_booking_app/feature/appointments_page/appointment_notifier.dart';
+import 'package:barber_booking_app/features/appointments_page/appointment_card.dart';
+import 'package:barber_booking_app/features/appointments_page/appointment_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

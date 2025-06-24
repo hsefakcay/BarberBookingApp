@@ -1,12 +1,12 @@
-import 'package:barber_booking_app/feature/appointments_page/appointments_page.dart';
-import 'package:barber_booking_app/feature/auth/authentication_view.dart';
-import 'package:barber_booking_app/feature/complete_profile_page/complete_profile_page_view.dart';
-import 'package:barber_booking_app/feature/favorites_page/favorites_page_view.dart';
-import 'package:barber_booking_app/feature/home_page/home_view.dart';
-import 'package:barber_booking_app/feature/onboarding/onboarding_page_view.dart';
-import 'package:barber_booking_app/feature/profile_page/profil_page_view.dart';
-import 'package:barber_booking_app/feature/settings_page/settings_page_view.dart';
-import 'package:barber_booking_app/feature/splash/splash_view.dart';
+import 'package:barber_booking_app/features/appointments_page/appointments_page.dart';
+import 'package:barber_booking_app/features/auth/authentication_view.dart';
+import 'package:barber_booking_app/features/complete_profile_page/complete_profile_page_view.dart';
+import 'package:barber_booking_app/features/favorites_page/favorites_page_view.dart';
+import 'package:barber_booking_app/features/home_page/home_view.dart';
+import 'package:barber_booking_app/features/onboarding/onboarding_page_view.dart';
+import 'package:barber_booking_app/features/profile_page/profil_page_view.dart';
+import 'package:barber_booking_app/features/settings_page/settings_page_view.dart';
+import 'package:barber_booking_app/features/splash/splash_view.dart';
 import 'package:flutter/widgets.dart';
 
 class AppRoutes {
