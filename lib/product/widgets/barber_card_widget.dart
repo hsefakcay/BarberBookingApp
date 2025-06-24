@@ -1,4 +1,4 @@
-import 'package:barber_booking_app/feature/barber_detail_page/barber_detail_page_view.dart';
+import 'package:barber_booking_app/features/barber_detail_page/barber_detail_page_view.dart';
 import 'package:barber_booking_app/product/constants/color_constants.dart';
 import 'package:barber_booking_app/product/enums/icon_size.dart';
 import 'package:barber_booking_app/product/models/barber.dart';

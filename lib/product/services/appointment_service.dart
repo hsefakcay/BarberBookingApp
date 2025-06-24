@@ -9,7 +9,6 @@ import 'package:logging/logging.dart';
 class AppointmentService {
   final Dio _dio = DioClient().dio;
 
-  // ignore: buradan kaldırılmalı bu metot
   String formatDate(String date) {
     try {
       // Gelen tarihi belirtilen input formatında parse et
@@ -21,7 +20,7 @@ class AppointmentService {
     }
   }
 
-// add new appointment
+  // Add new appointment
   Future<bool> addAppointment(Appointment appointment) async {
     try {
       final formattedDate = formatDate(appointment.date);
@@ -61,7 +60,7 @@ class AppointmentService {
       );
 
       if (response.statusCode == 200) {
-        // response.data'ya direkt erişim yerine, önce verinin tipini kontrol et
+        // Response.data'ya direkt erişim yerine, önce verinin tipini kontrol et
         final dynamic data = response.data;
 
         // Eğer veri bir List ise, her öğeyi String'e dönüştür
@@ -88,7 +87,7 @@ class AppointmentService {
       );
 
       if (response.statusCode == 200) {
-        // response.data'ya direkt erişim yerine, önce verinin tipini kontrol et
+        // Response.data'ya direkt erişim yerine, önce verinin tipini kontrol et
         final appointmentJson = response.data!;
         final list = appointmentJson
             .map((json) => Appointment.fromJson(json as Map<String, dynamic>))

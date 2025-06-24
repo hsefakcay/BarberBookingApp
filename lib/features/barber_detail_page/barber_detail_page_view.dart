@@ -1,5 +1,5 @@
-import 'package:barber_booking_app/feature/barber_detail_page/widgets/bottom_sheet_widget.dart';
-import 'package:barber_booking_app/feature/barber_detail_page/widgets/pro_barber_label.dart';
+import 'package:barber_booking_app/features/barber_detail_page/widgets/bottom_sheet_widget.dart';
+import 'package:barber_booking_app/features/barber_detail_page/widgets/pro_barber_label.dart';
 import 'package:barber_booking_app/product/constants/color_constants.dart';
 import 'package:barber_booking_app/product/constants/string_constants.dart';
 import 'package:barber_booking_app/product/enums/icon_size.dart';
